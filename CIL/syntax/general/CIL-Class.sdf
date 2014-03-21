@@ -1,0 +1,16 @@
+module general/CIL-Class
+imports lex/CIL-Names general/CIL-Type general/CIL-Statement
+        general/CIL-Directive general/CIL-Method general/CIL-Call
+        general/CIL-Field
+
+exports
+  context-free syntax
+    ".class" ClassAccess* ClassName ParentDecl "{" Field* Method* "}" -> Class       {cons("Class")}
+    "extends" Library ClassName                                       -> ParentDecl  {cons("ParentDecl")}
+                                                                      -> ParentDecl  {cons("None")}
+    "public"                                                          -> ClassAccess {cons("PUBLIC")}
+
+  context-free syntax
+    CONTENTCOMPLETE -> Class       {cons("COMPLETION-Class")}
+    CONTENTCOMPLETE -> ParentDecl  {cons("COMPLETION-ParentDecl")}
+    CONTENTCOMPLETE -> ClassAccess {cons("COMPLETION-ClassAccess")}

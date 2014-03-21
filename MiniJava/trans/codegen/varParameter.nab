@@ -1,0 +1,15 @@
+module varParameter
+
+imports
+  milestone1/-
+  milestone2/-
+  lib/jasmin/JasminXT
+
+
+namespaces
+
+	Variable
+	
+properties
+
+	var-index of Variable: Int

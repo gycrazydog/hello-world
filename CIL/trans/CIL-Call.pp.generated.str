@@ -1,0 +1,146 @@
+module CIL-Call.pp.generated
+
+strategies
+  prettyprint-Call :
+    Call(a, b, c, d, e) -> [ H(
+                               [SOpt(HS(), "0")]
+                             , [ S("call  ")
+                               , a2
+                               , S(" ")
+                               , b2
+                               , c2
+                               , S("::")
+                               , d2
+                               , S("(")
+                               , e2
+                               , S(")")
+                               ]
+                             )
+                           ]
+    where a2 := <pp-one-Z(prettyprint-ReturnType)> a
+    where b2 := <pp-one-Z(prettyprint-Library)> b
+    where c2 := <pp-one-Z(prettyprint-Object)> c
+    where d2 := <pp-one-Z(prettyprint-MethodName)> d
+    where e2 := <pp-H-list(prettyprint-Type|",")> e
+
+  prettyprint-Call :
+    CallClassVirtual(a, b, c, d, e) -> [ H(
+                                           [SOpt(HS(), "0")]
+                                         , [ S("callvirt instance ")
+                                           , a3
+                                           , S(" class ")
+                                           , b3
+                                           , c3
+                                           , S("::")
+                                           , d3
+                                           , S("(")
+                                           , e3
+                                           , S(")")
+                                           ]
+                                         )
+                                       ]
+    where a3 := <pp-one-Z(prettyprint-ReturnType)> a
+    where b3 := <pp-one-Z(prettyprint-Library)> b
+    where c3 := <pp-one-Z(prettyprint-Object)> c
+    where d3 := <pp-one-Z(prettyprint-MethodName)> d
+    where e3 := <pp-H-list(prettyprint-Type|",")> e
+
+  prettyprint-Call :
+    CallVirtual(a, b, c, d, e) -> [ H(
+                                      [SOpt(HS(), "0")]
+                                    , [ S("callvirt instance ")
+                                      , a4
+                                      , S("  ")
+                                      , b4
+                                      , c4
+                                      , S("::")
+                                      , d4
+                                      , S("(")
+                                      , e4
+                                      , S(")")
+                                      ]
+                                    )
+                                  ]
+    where a4 := <pp-one-Z(prettyprint-ReturnType)> a
+    where b4 := <pp-one-Z(prettyprint-Library)> b
+    where c4 := <pp-one-Z(prettyprint-Object)> c
+    where d4 := <pp-one-Z(prettyprint-MethodName)> d
+    where e4 := <pp-H-list(prettyprint-Type|",")> e
+
+  prettyprint-Call :
+    CallInstance(a, b, c, d, e) -> [ H(
+                                       [SOpt(HS(), "0")]
+                                     , [ S("call instance ")
+                                       , a5
+                                       , S(" ")
+                                       , b5
+                                       , c5
+                                       , S("::")
+                                       , d5
+                                       , S("(")
+                                       , e5
+                                       , S(")")
+                                       ]
+                                     )
+                                   ]
+    where a5 := <pp-one-Z(prettyprint-ReturnType)> a
+    where b5 := <pp-one-Z(prettyprint-Library)> b
+    where c5 := <pp-one-Z(prettyprint-Object)> c
+    where d5 := <pp-one-Z(prettyprint-MethodName)> d
+    where e5 := <pp-H-list(prettyprint-Type|",")> e
+
+  prettyprint-Call :
+    NewObj(a, b) -> [ H(
+                        [SOpt(HS(), "0")]
+                      , [ S("newobj void ")
+                        , a6
+                        , S("::.ctor(")
+                        , b6
+                        , S(")")
+                        ]
+                      )
+                    ]
+    where a6 := <pp-one-Z(prettyprint-Object)> a
+    where b6 := <pp-H-list(prettyprint-Type|",")> b
+
+  prettyprint-ReturnType :
+    a -> [ H(
+             [SOpt(HS(), "0")]
+           , [a7]
+           )
+         ]
+    where a7 := <pp-one-Z(prettyprint-Type)> a
+
+  prettyprint-Library :
+    MSLibrary() -> [ H(
+                       [SOpt(HS(), "0")]
+                     , [S("[mscorlib]")]
+                     )
+                   ]
+
+  prettyprint-Object :
+    Object(a) -> [ H(
+                     [SOpt(HS(), "0")]
+                   , [a8]
+                   )
+                 ]
+    where a8 := <pp-one-Z(prettyprint-ClassName)> a
+
+  prettyprint-Library :
+    None() -> [ H(
+                  [SOpt(HS(), "0")]
+                , []
+                )
+              ]
+
+  prettyprint-example =
+    prettyprint-Call
+
+  prettyprint-example =
+    prettyprint-ReturnType
+
+  prettyprint-example =
+    prettyprint-Object
+
+  prettyprint-example =
+    prettyprint-Library

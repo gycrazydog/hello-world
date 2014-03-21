@@ -1,0 +1,8 @@
+
+module CIL-Field.generated
+
+completions
+  completion template Field : ".field FieldAccess Type FieldName" =
+    ".field " <FieldAccess:FieldAccess> " " <Type:Type> " " <FieldName:FieldName>  
+  completion template FieldAccess : "public" =
+    "public"                        

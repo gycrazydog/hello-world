@@ -1,0 +1,24 @@
+module general/CIL-Class
+imports
+lex/CIL-Names
+general/CIL-Type
+general/CIL-Statement
+general/CIL-Directive
+general/CIL-Method
+general/CIL-Call
+general/CIL-Field
+templates
+Class.Class=
+< 
+.class <ClassAccess*> <ClassName> <ParentDecl>
+{ 
+<Field*;separator="\n">
+<Method*;separator="\n"> 	
+} 
+>
+ 
+ParentDecl.ParentDecl=<extends <Library><ClassName>>
+ParentDecl.None=<>
+
+ClassAccess.PUBLIC=<public>
+ 

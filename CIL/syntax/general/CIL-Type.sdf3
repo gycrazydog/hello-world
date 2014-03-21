@@ -1,0 +1,9 @@
+module general/CIL-Type
+imports lex/CIL-Names
+sorts
+Type
+templates
+Type.Int=<int32>
+Type.IntArray = <int32[]>
+Type.Void=<void> 
+Type.ClassType = <class <ClassName>> 

@@ -1,0 +1,148 @@
+module CIL-Directive.pp.generated
+
+strategies
+  prettyprint-Directive :
+    MaxStack(a) -> [ H(
+                       [SOpt(HS(), "0")]
+                     , [S(".maxstack "), a70]
+                     )
+                   ]
+    where a70 := <pp-one-Z(prettyprint-Int)> a
+
+  prettyprint-Directive :
+    Return() -> [ H(
+                    [SOpt(HS(), "0")]
+                  , [S("ret")]
+                  )
+                ]
+
+  prettyprint-Directive :
+    LDC(a) -> [ H(
+                  [SOpt(HS(), "0")]
+                , [S("ldc.i4 "), a71]
+                )
+              ]
+    where a71 := <pp-one-Z(prettyprint-Int)> a
+
+  prettyprint-Directive :
+    LDARG(a) -> [ H(
+                    [SOpt(HS(), "0")]
+                  , [S("ldarg."), a72]
+                  )
+                ]
+    where a72 := <pp-one-Z(prettyprint-Int)> a
+
+  prettyprint-Directive :
+    LDFLD(a, b, c) -> [ H(
+                          [SOpt(HS(), "0")]
+                        , [ S("ldfld ")
+                          , a73
+                          , S(" ")
+                          , b16
+                          , S("::")
+                          , c16
+                          ]
+                        )
+                      ]
+    where a73 := <pp-one-Z(prettyprint-Type)> a
+    where b16 := <pp-one-Z(prettyprint-ClassName)> b
+    where c16 := <pp-one-Z(prettyprint-FieldName)> c
+
+  prettyprint-Directive :
+    STFLD(a, b, c) -> [ H(
+                          [SOpt(HS(), "0")]
+                        , [ S("stfld ")
+                          , a74
+                          , S(" ")
+                          , b17
+                          , S("::")
+                          , c17
+                          ]
+                        )
+                      ]
+    where a74 := <pp-one-Z(prettyprint-Type)> a
+    where b17 := <pp-one-Z(prettyprint-ClassName)> b
+    where c17 := <pp-one-Z(prettyprint-FieldName)> c
+
+  prettyprint-Directive :
+    GOTO(a) -> [ H(
+                   [SOpt(HS(), "0")]
+                 , [S("br "), a75]
+                 )
+               ]
+    where a75 := <pp-one-Z(prettyprint-LabelRef)> a
+
+  prettyprint-Directive :
+    IFEQ(a) -> [ H(
+                   [SOpt(HS(), "0")]
+                 , [S("beq "), a76]
+                 )
+               ]
+    where a76 := <pp-one-Z(prettyprint-LabelRef)> a
+
+  prettyprint-Directive :
+    IFNE(a) -> [ H(
+                   [SOpt(HS(), "0")]
+                 , [S("bne "), a77]
+                 )
+               ]
+    where a77 := <pp-one-Z(prettyprint-LabelRef)> a
+
+  prettyprint-Directive :
+    LDC0() -> [ H(
+                  [SOpt(HS(), "0")]
+                , [S("ldc.i4.0")]
+                )
+              ]
+
+  prettyprint-Directive :
+    LDC1() -> [ H(
+                  [SOpt(HS(), "0")]
+                , [S("ldc.i4.1")]
+                )
+              ]
+
+  prettyprint-Directive :
+    ADD() -> [ H(
+                 [SOpt(HS(), "0")]
+               , [S("add")]
+               )
+             ]
+
+  prettyprint-Directive :
+    SUB() -> [ H(
+                 [SOpt(HS(), "0")]
+               , [S("sub")]
+               )
+             ]
+
+  prettyprint-Directive :
+    MUL() -> [ H(
+                 [SOpt(HS(), "0")]
+               , [S("mul")]
+               )
+             ]
+
+  prettyprint-Directive :
+    NOT() -> [ H(
+                 [SOpt(HS(), "0")]
+               , [S("not")]
+               )
+             ]
+
+  prettyprint-Directive :
+    AND() -> [ H(
+                 [SOpt(HS(), "0")]
+               , [S("and")]
+               )
+             ]
+
+  prettyprint-Directive :
+    LENGTH() -> [ H(
+                    [SOpt(HS(), "0")]
+                  , [S("ldlen")]
+                  )
+                ]
+
+  prettyprint-example =
+    prettyprint-Directive

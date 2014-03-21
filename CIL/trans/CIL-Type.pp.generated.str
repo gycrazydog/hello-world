@@ -1,0 +1,34 @@
+module CIL-Type.pp.generated
+
+strategies
+  prettyprint-Type :
+    Int() -> [ H(
+                 [SOpt(HS(), "0")]
+               , [S("int32")]
+               )
+             ]
+
+  prettyprint-Type :
+    IntArray() -> [ H(
+                      [SOpt(HS(), "0")]
+                    , [S("int32[]")]
+                    )
+                  ]
+
+  prettyprint-Type :
+    Void() -> [ H(
+                  [SOpt(HS(), "0")]
+                , [S("void")]
+                )
+              ]
+
+  prettyprint-Type :
+    ClassType(a) -> [ H(
+                        [SOpt(HS(), "0")]
+                      , [S("class "), a61]
+                      )
+                    ]
+    where a61 := <pp-one-Z(prettyprint-ClassName)> a
+
+  prettyprint-example =
+    prettyprint-Type

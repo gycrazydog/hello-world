@@ -1,0 +1,11 @@
+module general/CIL-Field
+imports
+general/CIL-Type
+lex/CIL-Names
+sorts
+Field
+templates
+
+Field.Filed=<.field <FieldAccess> <Type> <FieldName>>  
+
+FieldAccess.PUBLIC=<public>

@@ -1,0 +1,18 @@
+module general/CIL-Call
+imports
+lex/CIL-Names
+general/CIL-Type
+sorts
+Call
+templates
+Call.Call=<call  <ReturnType> <Library><Object>::<MethodName>(<Type*;separator=",",hide>)>
+Call.CallClassVirtual=<callvirt instance <ReturnType> class <Library><Object>::<MethodName>(<Type*;separator=",",hide>)>
+Call.CallVirtual=<callvirt instance <ReturnType>  <Library><Object>::<MethodName>(<Type*;separator=",",hide>)>
+Call.CallInstance=<call instance <ReturnType> <Library><Object>::<MethodName>(<Type*;separator=",",hide>)>
+Call.NewObj=<newobj void <Object>::.ctor(<Type*;separator=",",hide>)>
+
+ReturnType=<<Type>>  
+
+Library.MSLibrary=<[mscorlib]>
+Object.Object=<<ClassName>>
+Library.None=<<>>

@@ -1,0 +1,10 @@
+
+module CIL-Class.generated
+
+completions
+  completion template Class : ".class ClassName ParentDecl { }" =
+    ".class " <:ClassAccess> " " <ClassName:ClassName> " " <ParentDecl:ParentDecl> "\n{\n" (cursor) "\n}" (blank)  
+  completion template ParentDecl : "extends LibraryClassName" =
+    "extends " <Library:Library> <ClassName:ClassName>  
+  completion template ClassAccess : "public" =
+    "public"                                                        

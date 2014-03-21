@@ -1,0 +1,27 @@
+module codegen/field
+imports
+  
+  runtime/editor/origins
+runtime/types/-
+  trans/codegen/-
+  runtime/editor/annotations
+   runtime/nabl/-
+  milestone1/MiniJava
+  milestone2/MiniJava.core
+  lib/CIL/CIL
+  rules
+  	field-to-jbc:
+		Field(t, n)->[Filed(PUBLIC(), <type-to-jbc>t, n)]
+		
+	
+	//Print(FieldRef("x"))
+	
+        
+	fields-to-jbc:
+		[]->[]
+	fields-to-jbc:
+		[head|tail]->result*
+		where
+			h*:=<field-to-jbc>head;
+			s*:=<fields-to-jbc>tail;
+			result*:=[h*,s*]

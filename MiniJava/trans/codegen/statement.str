@@ -1,0 +1,123 @@
+module codegen/statement
+
+imports
+  
+  runtime/editor/origins
+ runtime/nabl/-
+  trans/codegen/-
+  runtime/editor/origins
+  runtime/editor/annotations
+   runtime/types/-
+  milestone1/MiniJava
+  milestone2/MiniJava.core
+  lib/CIL/CIL
+  rules
+  	stmt-to-jbc:
+  		Block(s)->n
+  		where
+  			n:=<stmtlist>s
+  stmtlist:
+  	[]->[]
+  	stmtlist:
+  		[Head|Tail]->result*
+  		where
+  			head*:=<stmt-to-jbc>Head;
+  			tail*:=<stmtlist>Tail;
+  			result*:=[head*,tail*]
+   /*	   
+   stmt-to-jbc: Print(s)->result*
+   where
+   	<debug(!"print ")>s;
+   	static*:=[GETSTATIC(
+          JBCFieldRef(
+            CRef("java/lang/System")
+          , FRef("out")
+          , JBCFieldDesc(Reference(CRef("java/io/PrintStream")))
+          )
+        )];
+        invoke*:=[INVOKEVIRTUAL(
+          JBCMethodRef(
+          	CRef("java/io/PrintStream")
+          , MRef("println")
+          , JBCMethodDesc([Int()], Void())
+          )
+        )];
+        op*:=<exp-to-jbc>s;
+   	  result*:=[static*, op*, invoke*]
+  */
+  stmt-to-jbc: Print(s)->temp*
+   where
+   	
+   	  exp*:=<exp-to-jbc>s;
+   	  <debug(!"exp:  ")>exp*;
+      call*:= [Call(Void(), MSLibrary(), Object("System.Console"), "WriteLine", [Int()])];  	  
+   	    <debug(!"call:  ")>call*;
+   	  temp*:=[exp*
+          , call*];
+              <debug(!"temp:  ")>temp*
+  
+  
+ stmt-to-jbc:
+ 	If(
+    condition*
+  , if-do*
+  ,else-do*
+  )->result*
+  where
+  	condition-bc*:=<exp-to-jbc;debug(!"condition success")>condition*;
+  	<debug(!"if do is ")>if-do*;
+  	if-do-bc*:=<stmt-to-jbc;debug(!"if do success")>if-do*;
+  	else-do-bc*:=<stmt-to-jbc>else-do*;
+  	label:=<newname>"Label";
+  	label2:=<newname>"Label";
+  	result*:=[condition-bc*,IFEQ(LabelRef(label)),if-do-bc*,GOTO(LabelRef(label2)),JBCLabel(label),else-do-bc*,JBCLabel(label2)]
+  	
+  	
+  	
+  	//While(True(), Block([Print(IntValue("1"))]))
+  	stmt-to-jbc:
+  		While(e*,s*)->result*
+  		where
+  			condition-bc*:=<exp-to-jbc>e*;
+  			statement*:=<stmt-to-jbc>s*;
+  			label:=<newname>"Label";
+  			label2:=<newname>"Label";
+  			result*:=[GOTO(LabelRef(label)),JBCLabel(label2),statement*,JBCLabel(label),condition-bc*,IFNE(LabelRef(label2))]
+  			
+  			
+  			
+  			
+  	stmt-to-jbc:
+  		Assign(FieldRef(x),r)->result*
+  		where
+  			first*:=<exp-to-jbc>r;
+  			class-name:=<nabl-uri-name><nabl-uri-parent><nabl-uri>x;
+		field-name:=<nabl-uri-name><nabl-uri>x;
+  			second*:=[PUTFIELD(
+          JBCFieldRef(
+            CRef(class-name)
+          , FRef(field-name)
+          , JBCFieldDesc(<type-to-jbc><get-type>x)
+          )
+        )];
+  			result*:=[ALOAD_0(),first*,second*]
+  			
+  			
+  			stmt-to-jbc:
+  		Assign(VarRef(x),r)->result*
+  		where
+  			first*:=<exp-to-jbc>r;
+  		i:=<get-var-index>x;
+		store-command*:=<store-command(|i)><get-type>x;
+  			result*:=[first*,store-command*]
+  			
+  			//ArrayAssign
+  	stmt-to-jbc:
+  		ArrayAssign(a,b,c)->result*
+  		where
+  			first*:=<exp-to-jbc>a;
+  			second*:=<exp-to-jbc>b;
+  			third*:=<exp-to-jbc>c;
+  			result*:=[first*,second*,third* ,IASTORE()]
+  			
+  			

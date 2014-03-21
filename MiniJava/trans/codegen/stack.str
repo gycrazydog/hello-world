@@ -1,0 +1,107 @@
+module codegen/stack
+
+imports
+  
+  runtime/editor/origins
+
+  trans/codegen/-
+  
+  
+  milestone1/MiniJava
+  milestone2/MiniJava.core
+  lib/CIL/CIL
+  rules
+  	stack-limit:
+     	BinExp(e,e1,e2)->num
+     	where
+     		num:=<add>(<stack-limit>e1,<stack-limit>e2)
+     		
+     		stack-limit:
+     			UnExp(unop,exp)->num
+     			where
+     				num:=<addi>(<stack-limit>unop,<stack-limit>exp)
+     	stack-limit:
+     	VarRef(_)->1         	
+     	stack-limit:
+     		FieldRef(_)->2	
+     	stack-limit:	
+     		IntValue(_)->1
+     		stack-limit:
+     		True()->1
+     		stack-limit:
+     		False()->1
+     		stack-limit:
+     		This()->1
+     		stack-limit:
+     		Call(exp,ID,ps)->result
+     		where
+     			r:=<stack-limit>exp;
+     			l:=<stack-exp-list>ps;
+     			result:=<addi>(r,l)
+     			
+     		stack-limit:
+     		NewObject(_)->2	
+     		
+     		stack-limit:
+     		Not()->1
+     		
+     		stack-exp-list:
+     			[]->0
+     		stack-exp-list:
+  		[Head|Tail]->result
+  		where
+  			head:=<stack-limit>Head;
+  			tail:=<stack-exp-list>Tail;
+  			result:=<addi>(head,tail)	
+     		
+  stack-limit:
+  Length()->0
+  stack-limit:
+  NewArray()->1 	
+     		
+     		stack-limit:
+  		Block(s)->num
+  		where
+  			num:=<stack-list>s
+  			stack-list:
+  	       []->0
+  	stack-list:
+  		[Head|Tail]->result
+  		where
+  			head:=<stack-limit>Head;
+  			tail:=<stack-list>Tail;
+  			result:=<max>(head,tail)
+
+  	stack-limit:
+  	If(condition,if-do,else-do)->num
+  	where
+  		m:=<max>(<stack-limit>condition,<stack-limit>if-do);
+  		num:=<max>(m,<stack-limit>else-do)
+  	
+  	
+  stack-limit:
+  	Print(s)->num
+  	where
+  		num:=<inc><stack-limit>s
+  		stack-limit:
+  While(e,s)->num
+  where
+  	num:=<max>(<stack-limit>e,<stack-limit>s)
+
+  stack-limit:
+  	Assign(FieldRef(x),r)->result
+  	where
+  	result:=<addi>(3,<stack-limit>r)
+  stack-limit:
+  	Assign(VarRef(x),r)->result
+  	where
+  	result:=<stack-limit>r
+  	
+  	stack-limit:
+  	ArrayAssign(a,b,c)->result
+  		where
+  			first:=<stack-limit>a;
+  			second:=<stack-limit>b;
+  			third:=<stack-limit>c;
+  			temp:=<addi>(first,second);
+  			result:=<addi>(temp, third)

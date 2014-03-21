@@ -1,0 +1,22 @@
+module general/CIL-Call
+imports lex/CIL-Names general/CIL-Type
+
+exports
+  sorts Call
+
+  context-free syntax
+    "call" ReturnType Library Object "::" MethodName "(" {Type ","}* ")"                        -> Call       {cons("Call")}
+    "callvirt" "instance" ReturnType "class" Library Object "::" MethodName "(" {Type ","}* ")" -> Call       {cons("CallClassVirtual")}
+    "callvirt" "instance" ReturnType Library Object "::" MethodName "(" {Type ","}* ")"         -> Call       {cons("CallVirtual")}
+    "call" "instance" ReturnType Library Object "::" MethodName "(" {Type ","}* ")"             -> Call       {cons("CallInstance")}
+    "newobj" "void" Object "::.ctor" "(" {Type ","}* ")"                                        -> Call       {cons("NewObj")}
+    Type                                                                                        -> ReturnType 
+    "[mscorlib]"                                                                                -> Library    {cons("MSLibrary")}
+    ClassName                                                                                   -> Object     {cons("Object")}
+                                                                                                -> Library    {cons("None")}
+
+  context-free syntax
+    CONTENTCOMPLETE -> Call       {cons("COMPLETION-Call")}
+    CONTENTCOMPLETE -> ReturnType {cons("COMPLETION-ReturnType")}
+    CONTENTCOMPLETE -> Object     {cons("COMPLETION-Object")}
+    CONTENTCOMPLETE -> Library    {cons("COMPLETION-Library")}

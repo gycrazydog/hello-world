@@ -1,0 +1,13 @@
+module general/CIL-Field
+imports general/CIL-Type lex/CIL-Names
+
+exports
+  sorts Field
+
+  context-free syntax
+    ".field" FieldAccess Type FieldName -> Field       {cons("Filed")}
+    "public"                            -> FieldAccess {cons("PUBLIC")}
+
+  context-free syntax
+    CONTENTCOMPLETE -> Field       {cons("COMPLETION-Field")}
+    CONTENTCOMPLETE -> FieldAccess {cons("COMPLETION-FieldAccess")}

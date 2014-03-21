@@ -1,0 +1,11 @@
+module CIL-Type.generated
+
+completions
+  completion template Type : "int32" =
+    "int32"  
+  completion template Type : "int32[]" =
+    "int32[]"  
+  completion template Type : "void" =
+    "void"  
+  completion template Type : "class ClassName" =
+    "class " <ClassName:ClassName>  

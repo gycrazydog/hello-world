@@ -1,0 +1,25 @@
+module codegen/example
+
+imports
+  codegen/-
+  milestone1/MiniJava
+  milestone2/MiniJava.core
+
+  lib/CIL/CIL
+rules
+	to-jbc = program-to-jbc + class-to-jbc + stmt-to-jbc + exp-to-jbc
+  program-to-jbc:Program(m,c)->result
+     where
+     	result:=<class-to-jbc>m
+
+
+
+  
+   	      	
+     	
+  
+  
+  
+   	   
+   
+  	 

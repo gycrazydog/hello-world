@@ -1,0 +1,16 @@
+
+module CIL-Call.generated
+
+completions
+  completion template Call : "call ReturnType LibraryObject::MethodName()" =
+    "call  " <ReturnType:ReturnType> " " <Library:Library> <Object:Object> "::" <MethodName:MethodName> "()"  
+  completion template Call : "callvirt instance ReturnType class LibraryObject::MethodName()" =
+    "callvirt instance " <ReturnType:ReturnType> " class " <Library:Library> <Object:Object> "::" <MethodName:MethodName> "()"  
+  completion template Call : "callvirt instance ReturnType LibraryObject::MethodName()" =
+    "callvirt instance " <ReturnType:ReturnType> "  " <Library:Library> <Object:Object> "::" <MethodName:MethodName> "()"  
+  completion template Call : "call instance ReturnType LibraryObject::MethodName()" =
+    "call instance " <ReturnType:ReturnType> " " <Library:Library> <Object:Object> "::" <MethodName:MethodName> "()"  
+  completion template Call : "newobj void Object::.ctor()" =
+    "newobj void " <Object:Object> "::.ctor()"                     
+  completion template Library : "[mscorlib]" =
+    "[mscorlib]"                                                                 

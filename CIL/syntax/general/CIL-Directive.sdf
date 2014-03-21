@@ -1,0 +1,27 @@
+module general/CIL-Directive
+imports lex/CIL-Numbers lex/CIL-Names general/CIL-Type
+
+exports
+  sorts Directive
+
+  context-free syntax
+    ".maxstack" Int                       -> Directive {cons("MaxStack")}
+    "ret"                                 -> Directive {cons("Return")}
+    "ldc.i4" Int                          -> Directive {cons("LDC")}
+    "ldarg." Int                          -> Directive {cons("LDARG")}
+    "ldfld" Type ClassName "::" FieldName -> Directive {cons("LDFLD")}
+    "stfld" Type ClassName "::" FieldName -> Directive {cons("STFLD")}
+    "br" LabelRef                         -> Directive {cons("GOTO")}
+    "beq" LabelRef                        -> Directive {cons("IFEQ")}
+    "bne" LabelRef                        -> Directive {cons("IFNE")}
+    "ldc.i4.0"                            -> Directive {cons("LDC0")}
+    "ldc.i4.1"                            -> Directive {cons("LDC1")}
+    "add"                                 -> Directive {cons("ADD")}
+    "sub"                                 -> Directive {cons("SUB")}
+    "mul"                                 -> Directive {cons("MUL")}
+    "not"                                 -> Directive {cons("NOT")}
+    "and"                                 -> Directive {cons("AND")}
+    "ldlen"                               -> Directive {cons("LENGTH")}
+
+  context-free syntax
+    CONTENTCOMPLETE -> Directive {cons("COMPLETION-Directive")}

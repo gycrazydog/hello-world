@@ -1,0 +1,76 @@
+module CIL
+
+signature
+  constructors
+                     : CilFILE -> Start
+    File             : CILHeader * List(Component) -> CilFILE
+                     : Class -> Component
+                     : Method -> Component
+    PUBLIC           : ClassAccess
+    None             : ParentDecl
+    ParentDecl       : Library * ClassName -> ParentDecl
+    Class            : List(ClassAccess) * ClassName * ParentDecl * List(Field) * List(Method) -> Class
+    EntryPoint       : EntryPoint
+    NONE             : MethodDescriptor
+    MANAGED          : MethodDescriptor
+    INSTANCE         : MethodAccess
+    RTSPECIALNAME    : MethodAccess
+    SPECIALNAME      : MethodAccess
+    PUBLIC           : MethodAccess
+    Method           : List(MethodAccess) * Type * MethodName * List(Type) * MethodDescriptor * List(Statement) -> Method
+    MainMethod       : List(MethodAccess) * Type * MethodName * List(Type) * EntryPoint * List(Statement) -> Method
+    PUBLIC           : FieldAccess
+    Filed            : FieldAccess * Type * FieldName -> Field
+    Property         : ClassName * List(ClassName) -> Property
+    CallExternal     : CallExternal
+    Header           : CallExternal * Property -> CILHeader
+                     : Call -> Statement
+                     : Directive -> Statement
+    Object           : ClassName -> Object
+    None             : Library
+    MSLibrary        : Library
+                     : Type -> ReturnType
+    NewObj           : Object * List(Type) -> Call
+    CallInstance     : ReturnType * Library * Object * MethodName * List(Type) -> Call
+    CallVirtual      : ReturnType * Library * Object * MethodName * List(Type) -> Call
+    CallClassVirtual : ReturnType * Library * Object * MethodName * List(Type) -> Call
+    Call             : ReturnType * Library * Object * MethodName * List(Type) -> Call
+    LDC1             : Directive
+    LDC0             : Directive
+    IFNE             : LabelRef -> Directive
+    IFEQ             : LabelRef -> Directive
+    STFLD            : Type * ClassName * FieldName -> Directive
+    LDFLD            : Type * ClassName * FieldName -> Directive
+    LDARG            : Int -> Directive
+    LDC              : Int -> Directive
+    Return           : Directive
+    MaxStack         : Int -> Directive
+    Void             : Type
+    Int              : Type
+    MRef             : MethodName -> MRef
+    FRef             : FieldName -> FRef
+    LabelRef         : LabelName -> LabelRef
+    VarNum           : Int -> VarRef
+    CRef             : ClassName -> ClassRef
+                     : QualifiedName -> MethodName
+                     : Identifier -> FieldName
+                     : QualifiedName -> ClassName
+                     : String -> LabelName
+                     : String -> QualifiedName
+                     : String -> SQIdentifier
+                     : String -> Identifier
+                     : Int -> Constant
+                     : String -> Int
+
+
+signature
+  constructors
+    Some : a -> Option(a)
+    None : Option(a)
+
+
+signature
+  constructors
+    Cons : a * List(a) -> List(a)
+    Nil  : List(a)
+    Conc : List(a) * List(a) -> List(a)

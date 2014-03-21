@@ -1,0 +1,217 @@
+module codegen/class
+
+imports
+  
+  runtime/editor/origins
+
+  trans/codegen/-
+  
+  
+  milestone1/MiniJava
+  milestone2/MiniJava.core
+  lib/CIL/CIL
+  rules
+  	//class-to-jbc:Class("A", None(), [], [])->r
+  	
+  class-to-jbc:MainClass(n,id2,s)->r
+  where
+   	  //<strip-annos>n
+   	   head:=Header(CallExternal(), Property(<strip-annos>n, []));
+   	  
+   	  <debug(!"head:  ")>head;
+ 
+   	 stmt* := <stmt-to-jbc>s;
+  class*:=[Class(
+      PUBLIC()
+    , <strip-annos>n,[]
+    , [ MainMethod(
+          []
+        , Void()
+        , "main"
+        , []
+        , EntryPoint()
+        , [ MaxStack("5")
+          , stmt*
+          , Return()
+          ]
+        )
+      ]
+    )];
+   	    r:=File(head,class*)
+   	    
+   	      	
+  /*	 class-to-jbc:MainClass(n,id2,s)->r
+  where
+   	  //<strip-annos>n
+   	  relative :=<origin-relative-path>;
+   	  list:=<string-tokenize(|['.'])>relative;
+   	  [head|tail]:=list;
+  		f:=<concat-strings>[head,"/",<strip-annos>n];
+  	//	limit:=<concat-strings>["\"",<stack-limit>s,"\""];
+   	   header:=JBCHeader(
+    None()
+  , None()
+  , JBCClass([PUBLIC()],<strip-annos>n)
+  , JBCSuper("java/lang/Object")
+  , []
+  , None()
+  , None()
+  , None()
+  );
+  statement*:=<stmt-to-jbc>s;
+  list*:=[ JBCLimitStack(<stack-limit>s)
+      ,statement* 
+      , RETURN()
+      ]
+  ;
+   	 method:=[ JBCMethod(
+      [PUBLIC()]
+    , Init()
+    , JBCMethodDesc([], Void())
+    , [ ALOAD_0()
+      , INVOKESPECIAL(
+          JBCMethodRef(CRef("java/lang/Object"), MRef(Init()), JBCMethodDesc([], Void()))
+        )
+      , RETURN()
+      ]
+    )
+  , JBCMethod(
+      [PUBLIC(), STATIC()]
+    , "main"
+    , JBCMethodDesc([Array(Reference(CRef("java/lang/String")))], Void())
+    , list*
+    )
+  ];
+   	    r:=JBCFile(header,[],method)
+   	      	
+     	
+  */
+  /*
+  
+  	 class-to-jbc:Class(n,None(),fs,ms)->r
+  where
+   	  //<strip-annos>n
+   	  relative :=<origin-relative-path>;
+   	  list:=<string-tokenize(|['.'])>relative;
+   	  [head|tail]:=list;
+  		f:=<concat-strings>[head,"/",<strip-annos>n];
+   	   header:=JBCHeader(
+    None()
+  , None()
+  , JBCClass([PUBLIC()],<strip-annos>n)
+  , JBCSuper("java/lang/Object")
+  , []
+  , None()
+  , None()
+  , None()
+  );
+   init_method:= JBCMethod(
+      [PUBLIC()]
+    , Init()
+    , JBCMethodDesc([], Void())
+    , [ ALOAD_0()
+      , INVOKESPECIAL(
+          JBCMethodRef(CRef("java/lang/Object"), MRef(Init()), JBCMethodDesc([], Void()))
+        )
+      , RETURN()
+      ]
+    );
+    
+    
+  methods*:=<methods-to-jbc>ms;
+ m*:=[init_method,methods*];
+   	 fields*:=<fields-to-jbc>fs;
+   	    r:=JBCFile(header,fields*,m*)
+   	    
+   	    
+   	    */
+   	    
+   	     class-to-jbc:Class(n,None(),fs,ms)->r
+   	    where
+   	    fields*:=<fields-to-jbc>fs;
+   	     methods*:=<methods-to-jbc>ms;
+   	    r:=Class(
+      []
+    , <strip-annos>n
+    , ParentDecl(MSLibrary(), "System.Object")
+    , fields*
+    , [ Method(
+          [PUBLIC(), SPECIALNAME(), RTSPECIALNAME(), INSTANCE()]
+        , Void()
+        , ".ctor"
+        , []
+        , MANAGED()
+        , [ MaxStack("1")
+          , LDARG("0")
+          , CallInstance(Void(), MSLibrary(), Object("System.Object"), ".ctor", [])
+          , Return()
+          ]
+        )
+      , methods*
+      ]
+    )
+   	    
+   	    
+   	    /*
+   	     class-to-jbc:Class(n,Parent(B),fs,ms)->r
+  where
+   	  //<strip-annos>n
+   	  relative :=<origin-relative-path>;
+   	  list:=<string-tokenize(|['.'])>relative;
+   	  [head|tail]:=list;
+  		f:=<concat-strings>[head,"/",<strip-annos>n];
+   	   header:=JBCHeader(
+    None()
+  , None()
+  , JBCClass([PUBLIC()],<strip-annos>n)
+  , JBCSuper(B)
+  , []
+  , None()
+  , None()
+  , None()
+  );
+   init_method:= JBCMethod(
+      [PUBLIC()]
+    , Init()
+    , JBCMethodDesc([], Void())
+    , [ ALOAD_0()
+      , INVOKESPECIAL(
+          JBCMethodRef(CRef(B), MRef(Init()), JBCMethodDesc([], Void()))
+        )
+      , RETURN()
+      ]
+    );
+    
+    fields*:=<fields-to-jbc>fs;
+  methods*:=<methods-to-jbc>ms;
+ m*:=[init_method,methods*];
+   	
+   	    r:=JBCFile(header,fields*,m*)
+   	    
+   	*/    
+   	    
+   	    
+   	      class-to-jbc:Class(n,Parent(B),fs,ms)->r
+   	    where
+   	    fields*:=<fields-to-jbc>fs;
+   	     methods*:=<methods-to-jbc>ms;
+   	    r:=Class(
+      []
+    , <strip-annos>n
+    , ParentDecl(None(), B)
+    , fields*
+    , [ Method(
+          [PUBLIC(), SPECIALNAME(), RTSPECIALNAME(), INSTANCE()]
+        , Void()
+        , ".ctor"
+        , []
+        , MANAGED()
+        , [ MaxStack("1")
+          , LDARG("0")
+          , CallInstance(Void(), None(), Object(B), ".ctor", [])
+          , Return()
+          ]
+        )
+      , methods*
+      ]
+    )	

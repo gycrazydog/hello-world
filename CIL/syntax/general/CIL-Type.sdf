@@ -1,0 +1,14 @@
+module general/CIL-Type
+imports lex/CIL-Names
+
+exports
+  sorts Type
+
+  context-free syntax
+    "int32"           -> Type {cons("Int")}
+    "int32[]"         -> Type {cons("IntArray")}
+    "void"            -> Type {cons("Void")}
+    "class" ClassName -> Type {cons("ClassType")}
+
+  context-free syntax
+    CONTENTCOMPLETE -> Type {cons("COMPLETION-Type")}

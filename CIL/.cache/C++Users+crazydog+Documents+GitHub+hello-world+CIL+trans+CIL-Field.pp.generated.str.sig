@@ -1,0 +1,1 @@
+Module("CIL-Field.pp.generated",[Strategies([SDefT("prettyprint-Field",[],[],[]),SDefT("prettyprint-FieldAccess",[],[],[]),SDefT("prettyprint-example",[],[],[]),SDefT("prettyprint-example",[],[],[])])])

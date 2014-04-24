@@ -1,0 +1,1 @@
+Module("CIL-Statement.pp.generated",[Strategies([SDefT("prettyprint-Statement",[],[],[]),SDefT("prettyprint-Statement",[],[],[]),SDefT("prettyprint-Statement",[],[],[]),SDefT("prettyprint-Label",[],[],[]),SDefT("prettyprint-example",[],[],[]),SDefT("prettyprint-example",[],[],[])])])

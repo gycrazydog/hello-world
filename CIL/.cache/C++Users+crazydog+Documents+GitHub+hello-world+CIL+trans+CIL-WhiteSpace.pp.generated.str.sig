@@ -1,0 +1,1 @@
+Module("CIL-WhiteSpace.pp.generated",[Strategies([SDefT("prettyprint-EOF",[],[],[]),SDefT("prettyprint-example",[],[],[])])])

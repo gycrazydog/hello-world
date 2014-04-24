@@ -1,0 +1,1 @@
+Module("CIL-Numbers.pp.generated",[Strategies([SDefT("prettyprint-Int",[],[],[]),SDefT("prettyprint-example",[],[],[])])])

@@ -7,7 +7,7 @@ menus
     action : "Show abstract syntax"     = debug-show-aterm (openeditor) (realtime) (meta) (source)                     
     action : "Show desugared syntax"    = debug-show-desugared (openeditor) (realtime) (meta) (source)
     action : "Show analyzed syntax"     = debug-show-analyzed (openeditor) (realtime) (meta)
-    action  : "Pretty-print"            = pp-builder (meta)                                    
+    action  : "Pretty-print"            = pp-builder (source) (meta)                                    
   
   menu: "Analysis"
     
@@ -19,5 +19,8 @@ menus
     action: "Show tasks (project)"      = debug-task-project (openeditor) (meta)
     action: "Show tasks (partition)"    = debug-task-partition (openeditor) (meta)
     action: "Show tasks (selection)"    = debug-task-selection (openeditor) (meta)
-                                                                                                 
-                                                 
+menu: "MiniJava"
+    action: "Generate CIL file" = generate-jbc(openeditor) (meta)
+    //action: "Test"=to-jbc(openeditor) (meta)
+    action: "Generate exe"=generate-class(openeditor) (meta)
+    action: "generate exe file and run"=execute-class(openeditor) (meta)

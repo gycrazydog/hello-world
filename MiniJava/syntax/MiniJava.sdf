@@ -1,8 +1,8 @@
 module MiniJava
+
 exports
   context-free start-symbols
-    Start 
-    
+    Start
+
   context-free syntax
-    
-    "dummy" -> Start {"Dummy"} 
+     -> Start {cons("Dummy")}

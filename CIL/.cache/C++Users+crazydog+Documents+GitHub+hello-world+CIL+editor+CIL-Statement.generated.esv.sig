@@ -1,0 +1,1 @@
+Module("CIL-Statement.generated",NoImports,[Completions("",[CompletionTemplateEx([Sort("Label")],CompletionPrefix(String("\"LabelName:\"")),[PlaceholderWithSort("<LabelName:","LabelName"),String("\":\"")],[])])])

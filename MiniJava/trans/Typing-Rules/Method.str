@@ -1,0 +1,26 @@
+module Method
+
+imports
+
+  assignment1/MiniJava
+  runtime/nabl/-
+  runtime/task/-
+  runtime/types/-
+  //names
+  trans/analysis/desugar
+
+rules
+	create-type-task(|ctx):
+  Call(c,m,ps) -> task5
+  where
+    task1 := <type-lookup(|ctx)> m                              // lookup sophisticated type of method name definition
+  ; task2 := <new-task(|ctx)> Rewrite("parameter-types", task1) // extract parameter types
+  ; task3 := <type-task(|ctx)> ps
+  ; task4 := <type-match(|ctx, task2)> task3                      // check actual argument types w.r.t. parameter types
+  ; task5 := <new-task(|ctx)> Rewrite("return-type", task1)     // extract return type
+  
+    task-rewrite: 
+  	("parameter-types", (ts,t)) -> ts
+
+	task-rewrite: 
+  	("return-type", (ts,t)) -> t

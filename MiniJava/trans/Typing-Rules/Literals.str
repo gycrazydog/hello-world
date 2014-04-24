@@ -1,0 +1,23 @@
+module Literals
+
+imports
+
+  assignment1/MiniJava
+  runtime/nabl/-
+  runtime/task/-
+  runtime/types/-
+  //names
+  trans/analysis/desugar
+  
+  rules
+  	create-type-task(|ctx): IntValue(_)  -> <type-is(|ctx)> Int()
+  	create-type-task(|ctx): True()  -> <type-is(|ctx)> Bool()
+  	create-type-task(|ctx): False()  -> <type-is(|ctx)> Bool()
+  	create-type-task(|ctx): NewObject(c) -> <type-is(|ctx)> ClassType(c)
+  	create-type-task(|ctx): 
+  	THIS@This() -> task
+  	where
+    task := <type-lookup(|ctx)> THIS
+    
+    
+    

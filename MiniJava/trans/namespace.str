@@ -1,0 +1,565 @@
+module namespace
+
+imports
+  lib/runtime/nabl/-
+  lib/runtime/task/-
+  lib/runtime/properties/-
+  lib/runtime/types/-
+  lib/runtime/editor/-
+  assignment1/MiniJava
+  trans/analysis/desugar
+
+
+signature
+  constructors
+    NablNsMainClass : Namespace
+    NablNsClass     : Namespace
+    NablNsMethod    : Namespace
+    NablNsVar       : Namespace
+    NablNsField     : Namespace
+    NablNsProgram   : Namespace
+    NablNsTHIS      : Namespace
+
+
+rules
+
+  nabl-scoping-site =
+    ?Program(_, _)
+    ; origin-track-forced(
+        nabl-scope(|[NablNsClass()])
+      |
+      )
+
+  nabl-get-scope =
+    ?Program(_, _)
+    ; ![NablNsClass()]
+
+  nabl-get-name :
+    MainClass(v, _, _) -> v
+
+  nabl-name-apply(s) =
+    MainClass(s, id, id)
+
+  nabl-def-site(child-uris__, sibl-uris__, implicits__|lang__, partition__, uniques__, uri__, states__) =
+    ?MainClass(v, _, _)
+    ; origin-track-forced(
+        MainClass(
+          nabl-def(
+            ?c-uri1__
+          , ?s-uri1__
+          | lang__
+          , partition__
+          , uniques__
+          , uri__
+          , uri__
+          , NablNsMainClass()
+          , Unique()
+          , Current()
+          , []
+          , []
+          )
+        , id
+        , id
+        )
+        ; match(child-uris__|c-uri1__)
+        ; match(sibl-uris__|s-uri1__)
+        ; match(implicits__|[])
+      |
+      )
+
+  nabl-prop-site(|lang__, partition__, uris__, states__, implicits__) =
+    ?MainClass(v, _, _)
+    ; origin-track-forced(
+        MainClass(
+          nabl-store-props(
+          | partition__
+          , [ Prop(Type(), MainClassType(), [])
+            ]
+          )
+        , id
+        , id
+        )
+      |
+      )
+
+  nabl-get-scope =
+    ?Class(c, _, _, _)
+    ; ![NablNsMethod(), NablNsField(), NablNsTHIS()]
+
+  nabl-get-name :
+    Class(c, _, _, _) -> c
+
+  nabl-name-apply(s) =
+    Class(s, id, id, id)
+
+  nabl-def-site(child-uris__, sibl-uris__, implicits__|lang__, partition__, uniques__, uri__, states__) =
+    ?Class(c, _, _, _)
+    ; origin-track-forced(
+        Class(
+          nabl-def(
+            ?c-uri1__
+          , ?s-uri1__
+          | lang__
+          , partition__
+          , uniques__
+          , uri__
+          , uri__
+          , NablNsClass()
+          , Unique()
+          , Current()
+          , [NablNsMethod(), NablNsField(), NablNsTHIS()]
+          , []
+          )
+        , id
+        , id
+        , id
+        )
+        ; where(i-2__ := <nabl-def(
+                            ?c-uri2__
+                          , ?s-uri2__
+                          | lang__
+                          , partition__
+                          , uniques__
+                          , c-uri1__
+                          , s-uri1__
+                          , NablNsTHIS()
+                          , Unique()
+                          , Current()
+                          , []
+                          , []
+                          )> This())
+        ; match(child-uris__|c-uri2__)
+        ; match(sibl-uris__|s-uri2__)
+        ; match(implicits__|[i-2__])
+      |
+      )
+
+  nabl-prop-site(|lang__, partition__, uris__, states__, implicits__) =
+    ?Class(c, _, _, _)
+    ; origin-track-forced(
+        where([i-2__] := implicits__)
+        ; Class(
+            nabl-store-props(
+            | partition__
+            , [ Prop(
+                  Type()
+                , ClassType(c)
+                , []
+                )
+              ]
+            )
+          , id
+          , id
+          , id
+          )
+        ; where(<nabl-store-props(
+                 | partition__
+                 , [ Prop(
+                       Type()
+                     , ClassType(c)
+                     , []
+                     )
+                   ]
+                 )> i-2__)
+      |
+      )
+
+  nabl-use-site(|lang__, partition__, uniques__, uris__, states__) =
+    ?This()
+    ; origin-track-forced(
+        nabl-use(
+        | lang__
+        , partition__
+        , uniques__
+        , uris__
+        , [ UseCandidate(
+              NablNsTHIS()
+            , []
+            , Current()
+            , True()
+            , []
+            )
+          ]
+        )
+      |
+      )
+
+  nabl-get-name :
+    Parent(c) -> c
+
+  nabl-name-apply(s) =
+    Parent(s)
+
+  nabl-use-site(|lang__, partition__, uniques__, uris__, states__) =
+    ?Parent(c)
+    ; origin-track-forced(
+        Parent(
+          nabl-use(
+          | lang__
+          , partition__
+          , uniques__
+          , uris__
+          , [ UseCandidate(
+                NablNsClass()
+              , []
+              , Current()
+              , True()
+              , []
+              )
+            , UseCandidate(
+                NablNsMainClass()
+              , []
+              , Current()
+              , True()
+              , []
+              )
+            ]
+          )
+        )
+      |
+      )
+
+  nabl-get-name :
+    NewObject(c) -> c
+
+  nabl-name-apply(s) =
+    NewObject(s)
+
+  nabl-use-site(|lang__, partition__, uniques__, uris__, states__) =
+    ?NewObject(c)
+    ; origin-track-forced(
+        NewObject(
+          nabl-use(
+          | lang__
+          , partition__
+          , uniques__
+          , uris__
+          , [ UseCandidate(
+                NablNsClass()
+              , []
+              , Current()
+              , True()
+              , []
+              )
+            , UseCandidate(
+                NablNsMainClass()
+              , []
+              , Current()
+              , True()
+              , []
+              )
+            ]
+          )
+        )
+      |
+      )
+
+  nabl-get-name :
+    ClassType(c) -> c
+
+  nabl-name-apply(s) =
+    ClassType(s)
+
+  nabl-use-site(|lang__, partition__, uniques__, uris__, states__) =
+    ?ClassType(c)
+    ; origin-track-forced(
+        ClassType(
+          nabl-use(
+          | lang__
+          , partition__
+          , uniques__
+          , uris__
+          , [ UseCandidate(
+                NablNsClass()
+              , []
+              , Current()
+              , True()
+              , []
+              )
+            , UseCandidate(
+                NablNsMainClass()
+              , []
+              , Current()
+              , True()
+              , []
+              )
+            ]
+          )
+        )
+      |
+      )
+
+  nabl-get-scope =
+    ?Method(t, m, ps, _, _, _)
+    ; ![NablNsVar()]
+
+  nabl-get-name :
+    Method(t, m, ps, _, _, _) -> m
+
+  nabl-name-apply(s) =
+    Method(id, s, id, id, id, id)
+
+  nabl-def-site(child-uris__, sibl-uris__, implicits__|lang__, partition__, uniques__, uri__, states__) =
+    ?Method(t, m, ps, _, _, _)
+    ; origin-track-forced(
+        Method(
+          id
+        , nabl-def(
+            ?c-uri1__
+          , ?s-uri1__
+          | lang__
+          , partition__
+          , uniques__
+          , uri__
+          , uri__
+          , NablNsMethod()
+          , Unique()
+          , Current()
+          , [NablNsVar()]
+          , []
+          )
+        , id
+        , id
+        , id
+        , id
+        )
+        ; match(child-uris__|c-uri1__)
+        ; match(sibl-uris__|s-uri1__)
+        ; match(implicits__|[])
+      |
+      )
+
+  nabl-prop-site(|lang__, partition__, uris__, states__, implicits__) =
+    ?Method(t, m, ps, _, _, _)
+    ; origin-track-forced(
+        where(r8-1-1__ := <get-property-task(|Type())> ps)
+        ; Method(
+            id
+          , nabl-store-props(
+            | partition__
+            , [ Prop(
+                  Type()
+                , (r8-1-1__, t)
+                , [r8-1-1__]
+                )
+              ]
+            )
+          , id
+          , id
+          , id
+          , id
+          )
+      |
+      )
+
+  nabl-get-name :
+    Field(t, v) -> v
+
+  nabl-name-apply(s) =
+    Field(id, s)
+
+  nabl-def-site(child-uris__, sibl-uris__, implicits__|lang__, partition__, uniques__, uri__, states__) =
+    ?Field(t, v)
+    ; origin-track-forced(
+        Field(
+          id
+        , nabl-def(
+            ?c-uri1__
+          , ?s-uri1__
+          | lang__
+          , partition__
+          , uniques__
+          , uri__
+          , uri__
+          , NablNsField()
+          , Unique()
+          , Current()
+          , []
+          , []
+          )
+        )
+        ; match(child-uris__|c-uri1__)
+        ; match(sibl-uris__|s-uri1__)
+        ; match(implicits__|[])
+      |
+      )
+
+  nabl-prop-site(|lang__, partition__, uris__, states__, implicits__) =
+    ?Field(t, v)
+    ; origin-track-forced(
+        Field(
+          id
+        , nabl-store-props(
+          | partition__
+          , [Prop(Type(), t, [])]
+          )
+        )
+      |
+      )
+
+  nabl-get-name :
+    Var(t, v) -> v
+
+  nabl-name-apply(s) =
+    Var(id, s)
+
+  nabl-def-site(child-uris__, sibl-uris__, implicits__|lang__, partition__, uniques__, uri__, states__) =
+    ?Var(t, v)
+    ; origin-track-forced(
+        Var(
+          id
+        , nabl-def(
+            ?c-uri1__
+          , ?s-uri1__
+          | lang__
+          , partition__
+          , uniques__
+          , uri__
+          , uri__
+          , NablNsVar()
+          , Unique()
+          , Current()
+          , []
+          , []
+          )
+        )
+        ; match(child-uris__|c-uri1__)
+        ; match(sibl-uris__|s-uri1__)
+        ; match(implicits__|[])
+      |
+      )
+
+  nabl-prop-site(|lang__, partition__, uris__, states__, implicits__) =
+    ?Var(t, v)
+    ; origin-track-forced(
+        Var(
+          id
+        , nabl-store-props(
+          | partition__
+          , [Prop(Type(), t, [])]
+          )
+        )
+      |
+      )
+
+  nabl-get-name :
+    Param(t, v) -> v
+
+  nabl-name-apply(s) =
+    Param(id, s)
+
+  nabl-def-site(child-uris__, sibl-uris__, implicits__|lang__, partition__, uniques__, uri__, states__) =
+    ?Param(t, v)
+    ; origin-track-forced(
+        Param(
+          id
+        , nabl-def(
+            ?c-uri1__
+          , ?s-uri1__
+          | lang__
+          , partition__
+          , uniques__
+          , uri__
+          , uri__
+          , NablNsVar()
+          , Unique()
+          , Current()
+          , []
+          , []
+          )
+        )
+        ; match(child-uris__|c-uri1__)
+        ; match(sibl-uris__|s-uri1__)
+        ; match(implicits__|[])
+      |
+      )
+
+  nabl-prop-site(|lang__, partition__, uris__, states__, implicits__) =
+    ?Param(t, v)
+    ; origin-track-forced(
+        Param(
+          id
+        , nabl-store-props(
+          | partition__
+          , [Prop(Type(), t, [])]
+          )
+        )
+      |
+      )
+
+  nabl-get-name :
+    Call(c, m, _) -> m
+
+  nabl-name-apply(s) =
+    Call(id, s, id)
+
+  nabl-use-site(|lang__, partition__, uniques__, uris__, states__) =
+    ?Call(c, m, _)
+    ; origin-track-forced(
+        where(r12-1-1-1__ := <get-property-task(|Type())> c)
+        ; where(r12-1-1-1-1__ := <new-task(|partition__)> Rewrite("match12-1-1-1-1", (r12-1-1-1__, [])))
+        ; Call(
+            id
+          , nabl-use(
+            | lang__
+            , partition__
+            , uniques__
+            , uris__
+            , [ UseCandidate(
+                  NablNsMethod()
+                , []
+                , Context(
+                    NablNsClass()
+                  , r12-1-1-1-1__
+                  , []
+                  , Current()
+                  )
+                , True()
+                , [r12-1-1-1-1__]
+                )
+              ]
+            )
+          , id
+          )
+      |
+      )
+
+  task-rewrite :
+    ( "match12-1-1-1-1"
+    , (ClassType(cn), [])
+    ) -> cn
+
+  nabl-get-name :
+    VarRef(v) -> v
+
+  nabl-name-apply(s) =
+    VarRef(s)
+
+  nabl-use-site(|lang__, partition__, uniques__, uris__, states__) =
+    ?VarRef(v)
+    ; origin-track-forced(
+        VarRef(
+          nabl-use(
+          | lang__
+          , partition__
+          , uniques__
+          , uris__
+          , [ UseCandidate(
+                NablNsVar()
+              , []
+              , Current()
+              , True()
+              , []
+              )
+            , UseCandidate(
+                NablNsField()
+              , []
+              , Current()
+              , True()
+              , []
+              )
+            ]
+          )
+        )
+      |
+      )

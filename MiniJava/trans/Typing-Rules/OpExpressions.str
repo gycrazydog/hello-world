@@ -1,0 +1,62 @@
+module OpExpressions
+
+imports
+
+  assignment1/MiniJava
+  runtime/nabl/-
+  runtime/task/-
+  runtime/types/-
+  //names
+  trans/analysis/desugar
+  
+  rules
+  	type-of-op: LENGTH() -> (IntArray(), Int())
+  	type-of-op: NOT() -> (Bool(), Bool())
+  	type-of-op: NEWARRAY() -> (Int(), IntArray())
+  	type-of-op: SUBSCRIPT() ->(IntArray(), Int(),Int())
+  	type-of-op: PLUS() -> (Int(),Int(),Int())
+  	type-of-op: SUB() -> (Int(),Int(),Int())
+  	type-of-op: MUL() -> (Int(),Int(),Int())
+  	type-of-op: LT() -> (Int(),Int(),Bool())
+  	type-of-op: AND() -> (Bool(),Bool(),Bool())
+    
+    create-type-task(|ctx): 
+  	BinExp(OP,e1,e2) -> <type-is(|ctx, [task2, task4])> ty
+  	where
+  	  (ty1,ty2,ty) := <type-of-op> OP
+      ; task1 := <type-task(|ctx)> e1
+  	  ; task2 := <type-match(|ctx, ty1)> task1
+      ; task3 := <type-task(|ctx)> e2
+      ; task4 := <type-match(|ctx, ty2)> task3
+        
+    create-type-task(|ctx): 
+  	UnExp(OP,e1) -> <type-is(|ctx, [task2])> ty
+  	where
+  		(ty1,ty) := <type-of-op> OP
+      ; task1 := <type-task(|ctx)> e1
+  	  ; task2 := <type-match(|ctx, ty1)> task1
+    
+    nabl-constraint(|ctx):
+  	BinExp(OP,e1,e2) -> <fail>
+  	where
+  	  (ty1,ty2,ty) := <type-of-op> OP
+      ; task1 := <type-task(|ctx)> e1
+  	  ; task2 := <type-match(|ctx, ty1)> task1
+	  ; <task-create-error-on-failure(|ctx, task2, "type of left side error! ")> e1
+    
+     nabl-constraint(|ctx):
+  	BinExp(OP,e1,e2) -> <fail>
+  	where
+  	  (ty1,ty2,ty) := <type-of-op> OP
+      ; task3 := <type-task(|ctx)> e2
+      ; task4 := <type-match(|ctx, ty2)> task3
+      ; <task-create-error-on-failure(|ctx, task4, "type of right side error! ")> e2   
+    
+    nabl-constraint(|ctx): 
+  	UnExp(OP,e1) -> <fail>
+  	where
+  		(ty1,ty) := <type-of-op> OP
+      ; task1 := <type-task(|ctx)> e1
+  	  ; task2 := <type-match(|ctx, ty1)> task1
+  	  ; msg  := <concat-strings> ["type of left side error! "]
+      ; <task-create-error-on-failure(|ctx, task2, msg)> e1

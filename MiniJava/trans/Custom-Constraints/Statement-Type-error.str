@@ -1,0 +1,50 @@
+module Statement-Type-error
+
+imports
+
+  assignment1/MiniJava
+  runtime/nabl/-
+  runtime/task/-
+  runtime/types/-
+
+rules
+	nabl-constraint(|ctx):
+ 	While(c,_) -> <fail>
+  	where
+  	task1 := <type-task(|ctx)> c
+  ; match  := <type-match(|ctx,Bool())> task1
+  ; msg    := <concat-strings> ["Type mismatch: boolean needed here !"]  	
+  ; <task-create-error-on-failure(|ctx, match, msg)> c 
+    
+    nabl-constraint(|ctx):
+ 	If(c,_,_) -> <fail>
+  	where
+  	task1 := <type-task(|ctx)> c
+  ; match  := <type-match(|ctx,Bool())> task1
+  ; msg    := <concat-strings> ["Type mismatch: boolean needed here !"]  	
+  ; <task-create-error-on-failure(|ctx, match, msg)> c 
+    
+    nabl-constraint(|ctx):
+ 	Print(c) -> <fail>
+  	where
+  	task1 := <type-task(|ctx)> c
+  ; match  := <type-match(|ctx,Int())> task1
+  ; msg    := <concat-strings> ["Type mismatch: int needed here !"]  	
+  ; <task-create-error-on-failure(|ctx, match, msg)> c 
+    
+  //   nabl-constraint(|ctx):
+ 	// Assign(v,c) -> <fail>
+  // 	where
+  // 	task1 := <type-lookup(|ctx)>  v
+  // ; task2 := <type-task(|ctx)> c
+  // ; match  := <type-match(|ctx,task1)> task2
+  // ; msg    := <concat-strings> ["Type mismatch for  here!"]  	
+  // ; <task-create-error-on-failure(|ctx, match, msg)> c 
+    
+    nabl-constraint(|ctx):
+ 	ArrayAssign(_,_,c) -> <fail>
+  	where
+  	task1 := <type-task(|ctx)> c
+  ; match  := <type-match(|ctx,Int())> task1
+  ; msg    := <concat-strings> ["Type mismatch: int needed here!"]  	
+  ; <task-create-error-on-failure(|ctx, match, msg)> c 

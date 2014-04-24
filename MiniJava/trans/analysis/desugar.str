@@ -1,0 +1,58 @@
+module analysis/desugar
+
+imports
+
+  assignment1/MiniJava
+  
+signature
+
+  sorts
+  
+  // ...
+  
+  constructors
+  PLUS: BinOp
+  SUB: BinOp
+  MUL: BinOp
+  LT: BinOp
+  AND: BinOp
+  SUBSCRIPT: BinOp
+  NOT: UnOp
+  LENGTH: UnOp
+  NEWARRAY: UnOp
+
+  
+  BinExp: BinOp * Exp * Exp -> Exp
+  UnExp: UnOp * Exp -> Exp  
+  
+  MainClassType: Type
+  // ...
+  
+rules
+  
+  // desugar: ... -> ...
+  desugar: Add(e1,e2) -> BinExp(PLUS(),e1,e2)
+  desugar: Mul(e1,e2) -> BinExp(MUL(),e1,e2)
+  desugar: Sub(e1,e2) -> BinExp(SUB(),e1,e2)
+  desugar: Lt(e1,e2) -> BinExp(LT(),e1,e2)
+  desugar: And(e1,e2) -> BinExp(AND(),e1,e2)
+  desugar: Subscript(e1,e2) -> BinExp(SUBSCRIPT(),e1,e2)
+  desugar: Not(e1) -> UnExp(NOT(),e1)
+  desugar: Length(e1) -> UnExp(LENGTH(),e1)
+  desugar: NewArray(e1) -> UnExp(NEWARRAY(),e1)
+  desugar: IntValue(num) -> IntValue(num1)
+  			where
+  				num2 := <string-starts-with(|"0")>num;
+  				num3 := <oct-string-to-int> num2;
+  				num1 := <int-to-string> num3
+  
+strategies
+  
+  // select one of these
+  
+  // desugar-all = innermost(debug;desugar)
+  // desugar-all = topdown(desugar)
+  // desugar-all = topdown(try(desugar))
+  // desugar-all = bottomup(desugar)
+   desugar-all = bottomup(try(desugar))
+  // desugar-all = alltd(desugar)

@@ -15,7 +15,6 @@ exports
                                    -> WATEREOF            
     "completion123"                -> COMPLETIONPREFIX    {completion}
     "|#WATERTOKENSTAR|"            -> WATERTOKENSTAR      {completion}
-    "|#Start|"                     -> Start               {completion}
 
   lexical restrictions
     WATERTOKEN -/- [A-Za-z0-9\_]
@@ -32,8 +31,7 @@ exports
     WATEREOF -/- ~[]
 
   lexical syntax
-    %% Lexical insertion recovery rules            
-                                        -> "dummy" {recover, cons("INSERTION")}
+    %% Lexical insertion recovery rules   
 
   syntax
     %% Kernel syntax insertion recovery rules   
@@ -46,6 +44,6 @@ exports
     Start
 
   context-free syntax
-    "dummy" -> Start {cons("Dummy")}
+     -> Start {cons("Dummy")}
 
   )

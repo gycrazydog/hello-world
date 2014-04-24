@@ -1,1 +1,0 @@
-Module("runtime/types/query",[Imports([(),()]),Rules([SDefT("type-task",[],[VarDec("ctx",ConstType(SortNoArgs("ATerm")))],[]),SDefT("get-type-task",[],[],[])]),Rules([SDefT("get-type",[],[],[])])])

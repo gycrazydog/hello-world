@@ -1,0 +1,1 @@
+Module("MiniJava-Folding.generated",NoImports,[Folding(" Default folding definitions",[])])

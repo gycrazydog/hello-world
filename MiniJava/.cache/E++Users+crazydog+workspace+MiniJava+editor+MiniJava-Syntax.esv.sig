@@ -1,0 +1,1 @@
+Module("MiniJava-Syntax",Imports([Import("MiniJava-Syntax.generated")]),[Language("",[])])

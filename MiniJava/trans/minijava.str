@@ -12,13 +12,12 @@ imports
   lib/runtime/types/-
   lib/runtime/task/-
   lib/runtime/properties/-
-  //lib/jasmin/-
-  lib/CIL/-
+  lib/jasmin/-
   trans/codegen/-
- 
+  
   milestone1/-
   milestone2/-
-  trans/CilPP/-
+  
 rules // Analysis
   
   editor-analyze = analysis-default-editor
@@ -54,9 +53,9 @@ rules // Editor services
       proposals := <analysis-propose-completions(|<language>, project-path, path)> ast
      
 rules // Builders
-	//class-name: JBCFile(JBCHeader(_, _, JBCClass(_, name), _, _, _, _, _), _, _) -> name
+	class-name: JBCFile(JBCHeader(_, _, JBCClass(_, name), _, _, _, _, _), _, _) -> name
 	
-	/*execute-class:
+	execute-class:
 		(selected, position, ast, path, project-path) -> None()
 		with
 			temp:=<pp-jasminxt-string><program-to-jbc>selected ;
@@ -70,7 +69,7 @@ rules // Builders
 			cfname := <concat-strings ; guarantee-extension(|"class")> [project-path, "/","bin", "/", <class-name><program-to-jbc> ast] ;
 			<refresh-workspace-file> cfname	
 	
-		*/
+		
 	/*generate-class:
 		(selected, position, ast, path, project-path) -> None()
 		with 
@@ -132,7 +131,7 @@ dir:
   	<fclose> file;
   	<refresh-workspace-file> filename
 	*/
-	/*generate-class:
+	generate-class:
 		(selected, position, ast, path, project-path) -> None()
 		with
 			temp:=<pp-jasminxt-string><program-to-jbc>selected ;
@@ -142,7 +141,7 @@ dir:
 		where
 			cfname := <concat-strings ; guarantee-extension(|"class")> [project-path, "/","bin", "/", <class-name><program-to-jbc> ast] ;
 			<refresh-workspace-file> cfname	
-*/
+
 		write-file:
 			(path,content)->None()
 			where
@@ -153,51 +152,13 @@ dir:
   	<refresh-workspace-file> filename
 	generate-jbc: (selected, position, ast, path, project-path) -> None()//(filename, result)
   where
-  	 filename := <guarantee-extension(|"il")> path;
+  	 filename := <guarantee-extension(|"j")> path;
   	 temp:=<program-to-jbc>selected ;
-  	result:=<pp-cil-string>temp;
+  	result:=<pp-jasminxt-string>temp;
   	file:=<fopen> (filename, "w");
   	<fputs> (result, file);
   	<fclose> file;
   	<refresh-workspace-file> filename
-  	
-  	generate-class:
-		(selected, position, ast, path, project-path) -> None()
-		with
-			 filename := <guarantee-extension(|"il")> path;
-  	 temp:=<program-to-jbc>selected ;
-  	result:=<pp-cil-string>temp;
-  	file:=<fopen> (filename, "w");
-  	<fputs> (result, file);
-  	<fclose> file;
-  	<refresh-workspace-file> filename;
-  	
-			dir:="C:/Windows/Microsoft.NET/Framework/v4.0.30319/ilasm";
-			 <debug(!"exe")> filename;
-			cfname := <guarantee-extension(|"exe")> filename ;
-			<try(call)> (dir,["/exe", $[[<project-path>]/[filename]],$[/output=[<project-path>]/[cfname]]]);
-		<refresh-workspace-file> cfname
-  	
-  	execute-class: (selected, position, ast, path, project-path) -> (filename, result)
-  
-  	with
-			 filename := <guarantee-extension(|"il")> path;
-  	 temp:=<program-to-jbc;debug(!"a: ")>ast ;
-  	 
-  	
-  	result:=<pp-CIL-debug; debug(!"b: ")>temp;
- 	file:=<fopen> (filename, "w");
-  	<fputs> (result, file);
-  	<fclose> file;
-  	<refresh-workspace-file> filename;
-   	
-		 	dir:="C:/Windows/Microsoft.NET/Framework/v4.0.30319/ilasm";
-		 	 <debug(!"exe")> filename;
-		 	cfname := <guarantee-extension(|"exe")> filename ;
-		 	<try(call)> (dir,["/exe", $[[<project-path>]/[filename]],$[/output=[<project-path>]/[cfname]]]);
-		 <refresh-workspace-file> cfname;
-		 rundir:=<concat-strings>[project-path,"/",cfname];
-		 <try(call)>(rundir,[])
   //	parentdir := <dirname> path ;
   	//	<try(call)> ("java", ["-jar", $[[<project-path>]/lib/jasmin.jar], "-d", parentdir, filename])
   //  		cfname := <concat-strings> [project-path, "/", <dirname> path, "/", <class-name> ast,".class"] ;
@@ -210,7 +171,7 @@ rules // Debugging
     (selected, position, ast, path, project-path) -> (filename, result)
     with
       filename := <guarantee-extension(|"aterm")> path;
-      result   := <program-to-jbc>selected
+      result   := selected
       
   // Prints the analyzed annotated abstract syntax ATerm of a selection.
   debug-show-analyzed:

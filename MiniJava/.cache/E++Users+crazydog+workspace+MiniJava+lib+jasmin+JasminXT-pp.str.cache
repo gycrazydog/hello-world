@@ -1,0 +1,1 @@
+Module("JasminXT-pp",[Imports([Import("libstratego-gpp"),Import("libstratego-aterm")]),Rules([SDefNoArgs("pp-jasminxt-string",Seq(CallT(SVar("ast2abox"),[],[NoAnnoList(List([RootApp(ImportTerm("lib/jasmin/JasminXT.generated.pp.af")),RootApp(ImportTerm("lib/jasmin/JasminXT.pp.af"))]))]),CallT(SVar("box2text-string"),[],[NoAnnoList(Int("100"))])))])])

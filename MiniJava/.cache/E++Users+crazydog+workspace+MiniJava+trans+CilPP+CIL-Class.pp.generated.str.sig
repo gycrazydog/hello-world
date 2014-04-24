@@ -1,0 +1,1 @@
+Module("CilPP/CIL-Class.pp.generated",[Strategies([SDefT("prettyprint-Class",[],[],[]),SDefT("prettyprint-ClassAccess",[],[],[]),SDefT("prettyprint-example",[],[],[]),SDefT("prettyprint-example",[],[],[])])])

@@ -20,7 +20,7 @@ menus
     action: "Show tasks (partition)"    = debug-task-partition (openeditor) (meta)
     action: "Show tasks (selection)"    = debug-task-selection (openeditor) (meta)
 menu: "MiniJava"
-    action: "Generate CIL file" = generate-jbc(openeditor) (meta)
-    //action: "Test"=to-jbc(openeditor) (meta)
-    action: "Generate exe"=generate-class(openeditor) (meta)
-    action: "generate exe file and run"=execute-class(openeditor) (meta)
+    action: "Generate Java bytecode" = generate-jbc(openeditor) (meta)
+    action: "Test"=to-jbc(openeditor) (meta)
+    action: "Generate Java class files"=generate-class(openeditor) (meta)
+    action: "generate class file and run"=execute-class(openeditor) (meta)

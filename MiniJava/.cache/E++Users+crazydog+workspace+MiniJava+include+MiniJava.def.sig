@@ -1,0 +1,1 @@
+definition([module(unparameterized("MiniJava"),[],[exports(conc-grammars(context-free-start-symbols([sort("Start")]),context-free-syntax([prod([lit("dummy")],sort("Start"),attrs([term(cons("Dummy"))]))])))])])

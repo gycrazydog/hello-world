@@ -1,0 +1,1 @@
+Module("MiniJava-Completions",Imports([Import("MiniJava.generated"),Import("Statements.generated"),Import("Expressions.generated"),Import("Classes.generated"),Import("Lexical.generated")]),[Completions("",[CompletionProposer([],Strategy("editor-complete"))])])

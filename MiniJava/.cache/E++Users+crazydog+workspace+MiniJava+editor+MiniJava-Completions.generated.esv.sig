@@ -1,0 +1,1 @@
+Module("MiniJava-Completions.generated",NoImports,[Completions("",[]),Completions("",[])])

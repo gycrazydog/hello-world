@@ -1,0 +1,1 @@
+Module("MiniJavaLexical.generated",NoImports,[])

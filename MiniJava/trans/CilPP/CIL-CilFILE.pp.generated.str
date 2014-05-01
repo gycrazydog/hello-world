@@ -1,18 +1,18 @@
-module CilPP/CIL-CilFILE.pp.generated
+module CIL-CilFILE.pp.generated
 
 strategies
   prettyprint-CilFILE :
     File(a, b) -> [ H(
                       [SOpt(HS(), "0")]
-                    , [a3]
+                    , [a102]
                     )
                   , H(
                       [SOpt(HS(), "0")]
-                    , [b1]
+                    , [b29]
                     )
                   ]
-    where a3 := <debug(!"x: "); pp-one-Z(prettyprint-CILHeader)> a
-    where b1 := <debug(!"y: "); pp-V-list(prettyprint-Component)> b
+    where a102 := <pp-one-Z(prettyprint-CILHeader)> a
+    where b29 := <pp-V-list(prettyprint-Component)> b
 
   prettyprint-example =
     prettyprint-CilFILE

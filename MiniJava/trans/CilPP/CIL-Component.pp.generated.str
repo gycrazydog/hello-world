@@ -1,21 +1,21 @@
-module CilPP/CIL-Component.pp.generated
+module CIL-Component.pp.generated
 
 strategies
   prettyprint-Component :
     a -> [ H(
              [SOpt(HS(), "0")]
-           , [a5]
+           , [a105]
            )
          ]
-    where a5 := <pp-one-Z(prettyprint-Method)> a
+    where a105 := <pp-one-Z(prettyprint-Method)> a
 
   prettyprint-Component :
     a -> [ H(
              [SOpt(HS(), "0")]
-           , [a6]
+           , [a106]
            )
          ]
-    where a6 := <pp-one-Z(prettyprint-Class)> a
+    where a106 := <pp-one-Z(prettyprint-Class)> a
 
   prettyprint-example =
     prettyprint-Component

@@ -1,4 +1,4 @@
-module CilPP/CIL-WhiteSpace.pp.generated
+module CIL-WhiteSpace.pp.generated
 
 strategies
   prettyprint-EOF =

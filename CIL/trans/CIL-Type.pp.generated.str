@@ -25,10 +25,10 @@ strategies
   prettyprint-Type :
     ClassType(a) -> [ H(
                         [SOpt(HS(), "0")]
-                      , [S("class "), a61]
+                      , [S("class "), a125]
                       )
                     ]
-    where a61 := <pp-one-Z(prettyprint-ClassName)> a
+    where a125 := <pp-one-Z(prettyprint-ClassName)> a
 
   prettyprint-example =
     prettyprint-Type

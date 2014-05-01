@@ -5,13 +5,13 @@ strategies
     MainMethod(a, b, c, d, e, f) -> [ H(
                                         [SOpt(HS(), "0")]
                                       , [ S(".method ")
-                                        , a24
+                                        , a119
                                         , S(" static ")
-                                        , b15
+                                        , b37
                                         , S(" ")
-                                        , c10
+                                        , c28
                                         , S("(")
-                                        , d7
+                                        , d8
                                         , S(")")
                                         ]
                                       )
@@ -21,55 +21,55 @@ strategies
                                       )
                                     , H(
                                         [SOpt(HS(), "0")]
-                                      , [e7]
+                                      , [e8]
                                       )
                                     , H(
                                         [SOpt(HS(), "0")]
-                                      , [f2]
+                                      , [f1]
                                       )
                                     , H(
                                         [SOpt(HS(), "0")]
                                       , [S("}")]
                                       )
                                     ]
-    where a24 := <pp-H-list(prettyprint-MethodAccess)> a
-    where b15 := <pp-one-Z(prettyprint-Type)> b
-    where c10 := <pp-one-Z(prettyprint-MethodName)> c
-    where d7 := <pp-H-list(prettyprint-Type|",")> d
-    where e7 := <pp-one-Z(prettyprint-EntryPoint)> e
-    where f2 := <pp-V-list(prettyprint-Statement)> f
+    where a119 := <pp-H-list(prettyprint-MethodAccess)> a
+    where b37 := <pp-one-Z(prettyprint-Type)> b
+    where c28 := <pp-one-Z(prettyprint-MethodName)> c
+    where d8 := <pp-H-list(prettyprint-Type|",")> d
+    where e8 := <pp-one-Z(prettyprint-EntryPoint)> e
+    where f1 := <pp-V-list(prettyprint-Statement)> f
 
   prettyprint-Method :
     Method(a, b, c, d, e, f) -> [ H(
                                     [SOpt(HS(), "0")]
                                   , [ S(".method ")
-                                    , a25
+                                    , a120
                                     , S(" ")
-                                    , b16
+                                    , b38
                                     , S(" ")
-                                    , c11
+                                    , c29
                                     , S("(")
-                                    , d8
+                                    , d9
                                     , S(")")
-                                    , e8
+                                    , e9
                                     ]
                                   )
                                 , H(
                                     [SOpt(HS(), "0")]
                                   , [S("{")]
                                   )
-                                , f3
+                                , f2
                                 , H(
                                     [SOpt(HS(), "0")]
                                   , [S("}")]
                                   )
                                 ]
-    where a25 := <pp-H-list(prettyprint-MethodAccess)> a
-    where b16 := <pp-one-Z(prettyprint-Type)> b
-    where c11 := <pp-one-Z(prettyprint-MethodName)> c
-    where d8 := <pp-H-list(prettyprint-Type|",")> d
-    where e8 := <pp-one-Z(prettyprint-MethodDescriptor)> e
-    where f3 := <pp-indent(|"2")> [<pp-V-list(prettyprint-Statement)> f]
+    where a120 := <pp-H-list(prettyprint-MethodAccess)> a
+    where b38 := <pp-one-Z(prettyprint-Type)> b
+    where c29 := <pp-one-Z(prettyprint-MethodName)> c
+    where d9 := <pp-H-list(prettyprint-Type|",")> d
+    where e9 := <pp-one-Z(prettyprint-MethodDescriptor)> e
+    where f2 := <pp-indent(|"2")> [<pp-V-list(prettyprint-Statement)> f]
 
   prettyprint-MethodAccess :
     PUBLIC() -> [ H(

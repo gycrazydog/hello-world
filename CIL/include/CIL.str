@@ -35,17 +35,27 @@ signature
     CallVirtual      : ReturnType * Library * Object * MethodName * List(Type) -> Call
     CallClassVirtual : ReturnType * Library * Object * MethodName * List(Type) -> Call
     Call             : ReturnType * Library * Object * MethodName * List(Type) -> Call
+    LT               : LabelRef -> Directive
+    LENGTH           : Directive
+    AND              : Directive
+    NOT              : Directive
+    MUL              : Directive
+    SUB              : Directive
+    ADD              : Directive
     LDC1             : Directive
     LDC0             : Directive
     IFNE             : LabelRef -> Directive
     IFEQ             : LabelRef -> Directive
+    GOTO             : LabelRef -> Directive
     STFLD            : Type * ClassName * FieldName -> Directive
     LDFLD            : Type * ClassName * FieldName -> Directive
     LDARG            : Int -> Directive
     LDC              : Int -> Directive
     Return           : Directive
     MaxStack         : Int -> Directive
+    ClassType        : ClassName -> Type
     Void             : Type
+    IntArray         : Type
     Int              : Type
     MRef             : MethodName -> MRef
     FRef             : FieldName -> FRef

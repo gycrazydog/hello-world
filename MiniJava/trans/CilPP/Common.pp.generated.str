@@ -1,4 +1,4 @@
-module CilPP/CilPP/Common.pp.generated
+module Common.pp.generated
 
 strategies
   prettyprint-ID =

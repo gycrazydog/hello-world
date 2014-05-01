@@ -4,15 +4,15 @@ strategies
   prettyprint-CilFILE :
     File(a, b) -> [ H(
                       [SOpt(HS(), "0")]
-                    , [a9]
+                    , [a102]
                     )
                   , H(
                       [SOpt(HS(), "0")]
-                    , [b7]
+                    , [b29]
                     )
                   ]
-    where a9 := <pp-one-Z(prettyprint-CILHeader)> a
-    where b7 := <pp-V-list(prettyprint-Component)> b
+    where a102 := <pp-one-Z(prettyprint-CILHeader)> a
+    where b29 := <pp-V-list(prettyprint-Component)> b
 
   prettyprint-example =
     prettyprint-CilFILE

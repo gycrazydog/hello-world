@@ -5,11 +5,11 @@ strategies
     Class(a, b, c, d, e) -> [ H(
                                 [SOpt(HS(), "0")]
                               , [ S(".class ")
-                                , a10
+                                , a103
                                 , S(" ")
-                                , b8
+                                , b30
                                 , S(" ")
-                                , c6
+                                , c24
                                 ]
                               )
                             , H(
@@ -18,31 +18,31 @@ strategies
                               )
                             , H(
                                 [SOpt(HS(), "0")]
-                              , [d6]
+                              , [d7]
                               )
                             , H(
                                 [SOpt(HS(), "0")]
-                              , [e6]
+                              , [e7]
                               )
                             , H(
                                 [SOpt(HS(), "0")]
                               , [S("}")]
                               )
                             ]
-    where a10 := <pp-H-list(prettyprint-ClassAccess)> a
-    where b8 := <pp-one-Z(prettyprint-ClassName)> b
-    where c6 := <pp-one-Z(prettyprint-ParentDecl)> c
-    where d6 := <pp-V-list(prettyprint-Field)> d
-    where e6 := <pp-V-list(prettyprint-Method)> e
+    where a103 := <pp-H-list(prettyprint-ClassAccess)> a
+    where b30 := <pp-one-Z(prettyprint-ClassName)> b
+    where c24 := <pp-one-Z(prettyprint-ParentDecl)> c
+    where d7 := <pp-V-list(prettyprint-Field)> d
+    where e7 := <pp-V-list(prettyprint-Method)> e
 
   prettyprint-ParentDecl :
     ParentDecl(a, b) -> [ H(
                             [SOpt(HS(), "0")]
-                          , [S("extends "), a11, b9]
+                          , [S("extends "), a104, b31]
                           )
                         ]
-    where a11 := <pp-one-Z(prettyprint-Library)> a
-    where b9 := <pp-one-Z(prettyprint-ClassName)> b
+    where a104 := <pp-one-Z(prettyprint-Library)> a
+    where b31 := <pp-one-Z(prettyprint-ClassName)> b
 
   prettyprint-ParentDecl :
     None() -> [ H(

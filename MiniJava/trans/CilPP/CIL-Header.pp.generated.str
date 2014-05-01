@@ -1,18 +1,18 @@
-module CilPP/CIL-Header.pp.generated
+module CIL-Header.pp.generated
 
 strategies
   prettyprint-CILHeader :
     Header(a, b) -> [ H(
                         [SOpt(HS(), "0")]
-                      , [a9]
+                      , [a117]
                       )
                     , H(
                         [SOpt(HS(), "0")]
-                      , [b3]
+                      , [b35]
                       )
                     ]
-    where a9 := <pp-one-Z(prettyprint-CallExternal)> a
-    where b3 := <pp-one-Z(prettyprint-Property)> b
+    where a117 := <pp-one-Z(prettyprint-CallExternal)> a
+    where b35 := <pp-one-Z(prettyprint-Property)> b
 
   prettyprint-CallExternal :
     CallExternal() -> [ H(
@@ -24,20 +24,20 @@ strategies
   prettyprint-Property :
     Property(a, b) -> [ H(
                           [SOpt(HS(), "0")]
-                        , [S(".assembly "), a10]
+                        , [S(".assembly "), a118]
                         )
                       , H(
                           [SOpt(HS(), "0")]
                         , [S("{")]
                         )
-                      , b4
+                      , b36
                       , H(
                           [SOpt(HS(), "0")]
                         , [S("}")]
                         )
                       ]
-    where a10 := <pp-one-Z(prettyprint-ClassName)> a
-    where b4 := <pp-indent(|"4")> [<pp-H-list(prettyprint-ClassName)> b]
+    where a118 := <pp-one-Z(prettyprint-ClassName)> a
+    where b36 := <pp-indent(|"4")> [<pp-H-list(prettyprint-ClassName)> b]
 
   prettyprint-example =
     prettyprint-CILHeader

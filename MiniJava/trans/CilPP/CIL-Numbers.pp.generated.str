@@ -1,4 +1,4 @@
-module CilPP/CIL-Numbers.pp.generated
+module CIL-Numbers.pp.generated
 
 strategies
   prettyprint-Int =

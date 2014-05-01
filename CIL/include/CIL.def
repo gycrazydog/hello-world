@@ -64,10 +64,18 @@ exports
     "ldarg." Int                          -> Directive {cons("LDARG")}
     "ldfld" Type ClassName "::" FieldName -> Directive {cons("LDFLD")}
     "stfld" Type ClassName "::" FieldName -> Directive {cons("STFLD")}
+    "br" LabelRef                         -> Directive {cons("GOTO")}
     "beq" LabelRef                        -> Directive {cons("IFEQ")}
     "bne" LabelRef                        -> Directive {cons("IFNE")}
     "ldc.i4.0"                            -> Directive {cons("LDC0")}
     "ldc.i4.1"                            -> Directive {cons("LDC1")}
+    "add"                                 -> Directive {cons("ADD")}
+    "sub"                                 -> Directive {cons("SUB")}
+    "mul"                                 -> Directive {cons("MUL")}
+    "not"                                 -> Directive {cons("NOT")}
+    "and"                                 -> Directive {cons("AND")}
+    "ldlen"                               -> Directive {cons("LENGTH")}
+    "blt" LabelRef                        -> Directive {cons("LT")}
 
   context-free syntax
     CONTENTCOMPLETE -> Directive {cons("COMPLETION-Directive")}
@@ -156,12 +164,16 @@ exports
     CONTENTCOMPLETE -> Label     {cons("COMPLETION-Label")}
 
 module general/CIL-Type
+imports lex/CIL-Names
+
 exports
   sorts Type
 
   context-free syntax
-    "int32" -> Type {cons("Int")}
-    "void"  -> Type {cons("Void")}
+    "int32"           -> Type {cons("Int")}
+    "int32[]"         -> Type {cons("IntArray")}
+    "void"            -> Type {cons("Void")}
+    "class" ClassName -> Type {cons("ClassType")}
 
   context-free syntax
     CONTENTCOMPLETE -> Type {cons("COMPLETION-Type")}

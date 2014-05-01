@@ -1,12 +1,31 @@
-module CilPP/CIL-Field.pp.generated
+module CIL-Field.pp.generated
 
 strategies
   prettyprint-Field :
-    Filed() -> [ H(
-                   []
-                 , [S("")]
-                 )
-               ]
+    Filed(a, b, c) -> [ H(
+                          [SOpt(HS(), "0")]
+                        , [ S(".field ")
+                          , a116
+                          , S(" ")
+                          , b34
+                          , S(" ")
+                          , c27
+                          ]
+                        )
+                      ]
+    where a116 := <pp-one-Z(prettyprint-FieldAccess)> a
+    where b34 := <pp-one-Z(prettyprint-Type)> b
+    where c27 := <pp-one-Z(prettyprint-FieldName)> c
+
+  prettyprint-FieldAccess :
+    PUBLIC() -> [ H(
+                    [SOpt(HS(), "0")]
+                  , [S("public")]
+                  )
+                ]
 
   prettyprint-example =
     prettyprint-Field
+
+  prettyprint-example =
+    prettyprint-FieldAccess

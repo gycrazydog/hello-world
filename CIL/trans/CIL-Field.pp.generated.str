@@ -5,17 +5,17 @@ strategies
     Filed(a, b, c) -> [ H(
                           [SOpt(HS(), "0")]
                         , [ S(".field ")
-                          , a21
+                          , a116
                           , S(" ")
-                          , b12
+                          , b34
                           , S(" ")
-                          , c9
+                          , c27
                           ]
                         )
                       ]
-    where a21 := <pp-one-Z(prettyprint-FieldAccess)> a
-    where b12 := <pp-one-Z(prettyprint-Type)> b
-    where c9 := <pp-one-Z(prettyprint-FieldName)> c
+    where a116 := <pp-one-Z(prettyprint-FieldAccess)> a
+    where b34 := <pp-one-Z(prettyprint-Type)> b
+    where c27 := <pp-one-Z(prettyprint-FieldName)> c
 
   prettyprint-FieldAccess :
     PUBLIC() -> [ H(

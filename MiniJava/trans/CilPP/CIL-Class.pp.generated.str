@@ -1,31 +1,55 @@
-module CilPP/CIL-Class.pp.generated
+module CIL-Class.pp.generated
 
 strategies
   prettyprint-Class :
-    Class(a, b, c) -> [ H(
-                          [SOpt(HS(), "0")]
-                        , [ S(".class ")
-                          , a4
-                          , S(" ")
-                          , b2
-                          ]
-                        )
-                      , H(
-                          [SOpt(HS(), "0")]
-                        , [S("{")]
-                        )
-                      , H(
-                          [SOpt(HS(), "0")]
-                        , [c1]
-                        )
-                      , H(
-                          [SOpt(HS(), "0")]
-                        , [S("}")]
-                        )
-                      ]
-    where a4 := <pp-H-list(prettyprint-ClassAccess); debug(!"1: ")> a
-    where b2 := <pp-one-Z(prettyprint-ClassName); debug(!"2: ")> b
-    where c1 := <pp-V-list(prettyprint-Method); debug(!"3: ")> c
+    Class(a, b, c, d, e) -> [ H(
+                                [SOpt(HS(), "0")]
+                              , [ S(".class ")
+                                , a103
+                                , S(" ")
+                                , b30
+                                , S(" ")
+                                , c24
+                                ]
+                              )
+                            , H(
+                                [SOpt(HS(), "0")]
+                              , [S("{")]
+                              )
+                            , H(
+                                [SOpt(HS(), "0")]
+                              , [d7]
+                              )
+                            , H(
+                                [SOpt(HS(), "0")]
+                              , [e7]
+                              )
+                            , H(
+                                [SOpt(HS(), "0")]
+                              , [S("}")]
+                              )
+                            ]
+    where a103 := <pp-H-list(prettyprint-ClassAccess)> a
+    where b30 := <pp-one-Z(prettyprint-ClassName)> b
+    where c24 := <pp-one-Z(prettyprint-ParentDecl)> c
+    where d7 := <pp-V-list(prettyprint-Field)> d
+    where e7 := <pp-V-list(prettyprint-Method)> e
+
+  prettyprint-ParentDecl :
+    ParentDecl(a, b) -> [ H(
+                            [SOpt(HS(), "0")]
+                          , [S("extends "), a104, b31]
+                          )
+                        ]
+    where a104 := <pp-one-Z(prettyprint-Library)> a
+    where b31 := <pp-one-Z(prettyprint-ClassName)> b
+
+  prettyprint-ParentDecl :
+    None() -> [ H(
+                  []
+                , [S("")]
+                )
+              ]
 
   prettyprint-ClassAccess :
     PUBLIC() -> [ H(
@@ -36,6 +60,9 @@ strategies
 
   prettyprint-example =
     prettyprint-Class
+
+  prettyprint-example =
+    prettyprint-ParentDecl
 
   prettyprint-example =
     prettyprint-ClassAccess

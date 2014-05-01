@@ -4,34 +4,34 @@ strategies
   prettyprint-Statement :
     a -> [ H(
              [SOpt(HS(), "0")]
-           , [a26]
+           , [a121]
            )
          ]
-    where a26 := <pp-one-Z(prettyprint-Directive)> a
+    where a121 := <pp-one-Z(prettyprint-Directive)> a
 
   prettyprint-Statement :
     a -> [ H(
              [SOpt(HS(), "0")]
-           , [a27]
+           , [a122]
            )
          ]
-    where a27 := <pp-one-Z(prettyprint-Label)> a
+    where a122 := <pp-one-Z(prettyprint-Label)> a
 
   prettyprint-Statement :
     a -> [ H(
              [SOpt(HS(), "0")]
-           , [a28]
+           , [a123]
            )
          ]
-    where a28 := <pp-one-Z(prettyprint-Call)> a
+    where a123 := <pp-one-Z(prettyprint-Call)> a
 
   prettyprint-Label :
     a -> [ H(
              [SOpt(HS(), "0")]
-           , [a29, S(":")]
+           , [a124, S(":")]
            )
          ]
-    where a29 := <pp-one-Z(prettyprint-LabelName)> a
+    where a124 := <pp-one-Z(prettyprint-LabelName)> a
 
   prettyprint-example =
     prettyprint-Statement

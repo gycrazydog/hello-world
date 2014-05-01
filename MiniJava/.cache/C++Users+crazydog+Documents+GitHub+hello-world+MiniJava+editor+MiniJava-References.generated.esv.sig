@@ -1,0 +1,1 @@
+Module("MiniJava-References.generated",NoImports,[References("",[])])

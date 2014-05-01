@@ -1,0 +1,1 @@
+Module("MiniJava-Menus.generated",NoImports,[])

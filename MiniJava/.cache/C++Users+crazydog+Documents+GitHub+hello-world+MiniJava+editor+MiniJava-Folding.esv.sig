@@ -1,0 +1,1 @@
+Module("MiniJava-Folding",Imports([Import("MiniJava-Folding.generated")]),[Folding("",[FoldRule(SortAndConstructor(Sort("Statement"),Constructor("Block")),None),FoldRule(SortAndConstructor(Sort("Statement"),Constructor("If")),None),FoldRule(SortAndConstructor(Sort("Statement"),Constructor("While")),None)])])

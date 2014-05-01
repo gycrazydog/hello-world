@@ -1,0 +1,1 @@
+Module("lib-refactoring/analysis-multifile.generated",[Imports([(),(),()]),Rules([SDefT("multifile-analyze-asts",[],[],[]),SDefT("multifile-analyze-asts-internal",[],[VarDec("language",ConstType(SortNoArgs("ATerm"))),VarDec("project-path",ConstType(SortNoArgs("ATerm")))],[RDecT("Index-UnresolvedSet",[],[])])])])

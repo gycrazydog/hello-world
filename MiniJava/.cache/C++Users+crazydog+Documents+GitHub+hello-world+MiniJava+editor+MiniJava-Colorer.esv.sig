@@ -1,0 +1,1 @@
+Module("MiniJava-Colorer",Imports([Import("MiniJava-Colorer.generated")]),[Colorer("",[])])

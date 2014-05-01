@@ -1,0 +1,1 @@
+Module("MiniJava-Refactorings",Imports([Import("MiniJava-Refactorings.generated")]),[Refactorings("",[]),Refactorings("",[PrettyPrint(Strategy("pp-minijava-string"))])])

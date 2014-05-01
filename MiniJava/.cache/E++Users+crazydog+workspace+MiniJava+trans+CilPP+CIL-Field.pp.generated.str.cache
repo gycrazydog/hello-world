@@ -1,0 +1,1 @@
+Module("CilPP/CIL-Field.pp.generated",[Strategies([RDefNoArgs("prettyprint-Field",RuleNoCond(NoAnnoList(Op("Filed",[])),NoAnnoList(List([NoAnnoList(Op("H",[NoAnnoList(List([])),NoAnnoList(List([NoAnnoList(Op("S",[NoAnnoList(Str("\"\""))]))]))]))])))),SDefNoArgs("prettyprint-example",CallNoArgs(SVar("prettyprint-Field")))])])

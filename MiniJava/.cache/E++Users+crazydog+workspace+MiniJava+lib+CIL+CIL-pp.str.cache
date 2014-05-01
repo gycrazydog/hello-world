@@ -1,0 +1,1 @@
+Module("CIL-pp",[Imports([Import("libstratego-gpp"),Import("libstratego-aterm")]),Rules([SDefNoArgs("pp-cil-string",Seq(CallT(SVar("ast2abox"),[],[NoAnnoList(List([RootApp(ImportTerm("lib/CIL/CIL.generated.pp.af")),RootApp(ImportTerm("lib/CIL/CIL.pp.af"))]))]),CallT(SVar("box2text-string"),[],[NoAnnoList(Int("100"))])))])])

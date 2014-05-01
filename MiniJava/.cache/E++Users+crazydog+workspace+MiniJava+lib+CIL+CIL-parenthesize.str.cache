@@ -1,0 +1,1 @@
+Module("include/CIL-parenthesize",[Imports([Import("libstratego-lib")]),Strategies([SDefNoArgs("io-CIL-parenthesize",Call(SVar("io-wrap"),[Id]))])])

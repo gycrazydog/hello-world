@@ -22,6 +22,7 @@ exports
     "not"                                 -> Directive {cons("NOT")}
     "and"                                 -> Directive {cons("AND")}
     "ldlen"                               -> Directive {cons("LENGTH")}
+    "blt" LabelRef                        -> Directive {cons("LT")}
 
   context-free syntax
     CONTENTCOMPLETE -> Directive {cons("COMPLETION-Directive")}

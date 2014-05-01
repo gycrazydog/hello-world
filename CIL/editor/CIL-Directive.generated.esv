@@ -35,3 +35,5 @@ completions
     "and"                            
   completion template Directive : "ldlen" =
     "ldlen"                        
+  completion template Directive : "bltLabelRef" =
+    "blt" <LabelRef:LabelRef>  

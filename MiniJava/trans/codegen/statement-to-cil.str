@@ -1,0 +1,20 @@
+module codegen/statement-to-cil
+
+imports
+  
+  milestone1/MiniJava
+  milestone2/MiniJava.core
+//  lib/jasmin/JasminXT
+  lib/CIL/CIL
+  codegen/-
+rules
+   stmt-to-jbc: Print(s)->temp*
+   where
+
+   	  exp*:=<exp-to-jbc>s;
+   	  <debug(!"exp:  ")>exp*;
+      call*:= [Call(Void(), MSLibrary(), Object("System.Console"), "WriteLine", [Int()])];  	  
+   	    <debug(!"call:  ")>call*;
+   	  temp*:=[exp*
+          , call*];
+              <debug(!"temp:  ")>temp*

@@ -1,0 +1,38 @@
+module codegen/class-to-cil
+
+imports
+  
+  milestone1/MiniJava
+  milestone2/MiniJava.core
+//  lib/jasmin/JasminXT
+  lib/CIL/CIL
+  codegen/-
+rules
+	
+	 class-to-jbc:MainClass(n,id2,s)->r
+ 	 where
+   	  //<strip-annos>n
+   	   head:=Header(CallExternal(), Property(<strip-annos>n, []));
+   	  
+   	  <debug(!"head:  ")>head;
+    	   	  <debug(!"s:  ")>s;
+   	 stmt* := <stmt-to-jbc>s;
+  	 class*:=[Class(
+      []
+    , <strip-annos>n
+    ,[]
+    ,[]
+    , [ MainMethod(
+          []
+        , Void()
+        , "main"
+        , []
+        , EntryPoint()
+        , [ MaxStack("5")
+          , stmt*
+          , Return()
+          ]
+        )
+      	]
+    	)];
+   	    r:=File(head,class*)

@@ -1,1 +1,1 @@
-Module("CilPP/CIL-WhiteSpace.pp.generated",[Strategies([SDefNoArgs("prettyprint-EOF",Build(NoAnnoList(List([NoAnnoList(Op("S",[RootApp(CallNoArgs(SVar("is-string")))]))])))),SDefNoArgs("prettyprint-example",CallNoArgs(SVar("prettyprint-EOF")))])])
+Module("CIL-WhiteSpace.pp.generated",[Strategies([SDefNoArgs("prettyprint-EOF",Build(NoAnnoList(List([NoAnnoList(Op("S",[RootApp(CallNoArgs(SVar("is-string")))]))])))),SDefNoArgs("prettyprint-example",CallNoArgs(SVar("prettyprint-EOF")))])])

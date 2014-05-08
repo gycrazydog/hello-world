@@ -1,1 +1,1 @@
-Module("CilPP/CIL-Component.pp.generated",[Strategies([SDefT("prettyprint-Component",[],[],[]),SDefT("prettyprint-Component",[],[],[]),SDefT("prettyprint-example",[],[],[])])])
+Module("CIL-Component.pp.generated",[Strategies([SDefT("prettyprint-Component",[],[],[]),SDefT("prettyprint-Component",[],[],[]),SDefT("prettyprint-example",[],[],[])])])

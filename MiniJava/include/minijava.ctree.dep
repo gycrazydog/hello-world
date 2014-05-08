@@ -44,8 +44,14 @@ C:\Users\crazydog\Documents\GitHub\hello-world\MiniJava\include/minijava.ctree: 
 	C:\Users\crazydog\Documents\GitHub\hello-world\MiniJava/milestone1/outline.rtree \
 	C:\Users\crazydog\Documents\GitHub\hello-world\MiniJava/milestone1/MiniJava.str \
 	C:\Users\crazydog\Documents\GitHub\hello-world\MiniJava/milestone1/MiniJava-parenthesize.str \
-	C:\Users\crazydog\Documents\GitHub\hello-world\MiniJava/lib/jasmin/JasminXT.str \
-	C:\Users\crazydog\Documents\GitHub\hello-world\MiniJava/trans/codegen/example.str \
+	C:\Users\crazydog\Documents\GitHub\hello-world\MiniJava/trans/codegen/statement-to-cil.str \
+	C:\Users\crazydog\Documents\GitHub\hello-world\MiniJava/trans/codegen/program-to-cil.str \
+	C:\Users\crazydog\Documents\GitHub\hello-world\MiniJava/trans/codegen/exp-to-cil.str \
+	C:/Users/crazydog/Documents/GitHub/hello-world/MiniJava/trans/codegen/statement-to-cil.str \
+	C:/Users/crazydog/Documents/GitHub/hello-world/MiniJava/trans/codegen/program-to-cil.str \
+	C:/Users/crazydog/Documents/GitHub/hello-world/MiniJava/trans/codegen/exp-to-cil.str \
+	C:/Users/crazydog/Documents/GitHub/hello-world/MiniJava/trans/codegen/class-to-cil.str \
+	C:\Users\crazydog\Documents\GitHub\hello-world\MiniJava/trans/codegen/class-to-cil.str \
 	C:\Users\crazydog\Documents\GitHub\hello-world\MiniJava/lib/CIL/CIL.str \
 	C:\Users\crazydog\Documents\GitHub\hello-world\MiniJava/lib/CIL/CIL-pp.str \
 	C:\Users\crazydog\Documents\GitHub\hello-world\MiniJava/lib/CIL/CIL-parenthesize.str \

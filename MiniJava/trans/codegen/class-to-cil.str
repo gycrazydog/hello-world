@@ -9,14 +9,14 @@ imports
   codegen/-
 rules
 	
-	 class-to-jbc:MainClass(n,id2,s)->r
+	 class-to-cil:MainClass(n,id2,s)->r
  	 where
    	  //<strip-annos>n
    	   head:=Header(CallExternal(), Property(<strip-annos>n, []));
    	  
    	  <debug(!"head:  ")>head;
     	   	  <debug(!"s:  ")>s;
-   	 stmt* := <stmt-to-jbc>s;
+   	 stmt* := <stmt-to-cil>s;
   	 class*:=[Class(
       []
     , <strip-annos>n

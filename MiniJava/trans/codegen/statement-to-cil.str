@@ -8,13 +8,22 @@ imports
   lib/CIL/CIL
   codegen/-
 rules
-   stmt-to-jbc: Print(s)->temp*
+   stmt-to-cil: Print(s)->temp*
    where
-
-   	  exp*:=<exp-to-jbc>s;
+   	  exp*:=<exp-to-cil>s;
    	  <debug(!"exp:  ")>exp*;
       call*:= [Call(Void(), MSLibrary(), Object("System.Console"), "WriteLine", [Int()])];  	  
-   	    <debug(!"call:  ")>call*;
+   	  <debug(!"call:  ")>call*;
    	  temp*:=[exp*
           , call*];
-              <debug(!"temp:  ")>temp*
+      <debug(!"temp:  ")>temp*
+      
+    stmt-to-cil: Block(stmt)->rec_stmt
+    where
+    	rec_stmt := <stmtlist-to-cil> stmt
+    	
+    stmtlist-to-cil : stmtlist -> result
+  		where
+  			result := <map(stmt-to-cil)> stmtlist
+  
+ 

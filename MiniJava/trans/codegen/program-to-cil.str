@@ -7,9 +7,10 @@ imports
 //  lib/jasmin/JasminXT
   lib/CIL/CIL
   codegen/-
+  
 rules
-	to-jbc = program-to-jbc + class-to-jbc + stmt-to-jbc + exp-to-jbc
-  	program-to-jbc:Program(m,c)->result
+	to-cil = program-to-cil + class-to-cil + stmt-to-cil + exp-to-cil
+  	program-to-cil:Program(m,c)->result
      where
-     	result:=<class-to-jbc>m
+     	result:=<class-to-cil>m
   

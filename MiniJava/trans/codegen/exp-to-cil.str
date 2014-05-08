@@ -8,4 +8,4 @@ imports
   lib/CIL/CIL
   codegen/-
 rules
-  exp-to-jbc: IntValue(i) -> [LDC(i)]
+  exp-to-cil: IntValue(i) -> [LDC(i)]

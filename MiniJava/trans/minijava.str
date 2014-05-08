@@ -154,7 +154,7 @@ dir:
 	generate-jbc: (selected, position, ast, path, project-path) -> None()//(filename, result)
   where
   	 filename := <guarantee-extension(|"il")> path;
-  	 temp:=<program-to-jbc>selected ;
+  	 temp:=<program-to-cil>selected ;
   	result:=<pp-cil-string>temp;
   	file:=<fopen> (filename, "w");
   	<fputs> (result, file);
@@ -165,7 +165,7 @@ dir:
 		(selected, position, ast, path, project-path) -> None()
 		with
 			 filename := <guarantee-extension(|"il")> path;
-  	 temp:=<program-to-jbc>selected ;
+  	 temp:=<program-to-cil>selected ;
   	result:=<pp-cil-string>temp;
   	file:=<fopen> (filename, "w");
   	<fputs> (result, file);
@@ -182,7 +182,7 @@ dir:
   
   	with
 			 filename := <guarantee-extension(|"il")> path;
-  	 temp:=<program-to-jbc;debug(!"a: ")>ast ;
+  	 temp:=<program-to-cil;debug(!"a: ")>ast ;
   	 
   	
   	result:=<pp-CIL-debug; debug(!"b: ")>temp;
@@ -210,7 +210,7 @@ rules // Debugging
     (selected, position, ast, path, project-path) -> (filename, result)
     with
       filename := <guarantee-extension(|"aterm")> path;
-      result   := <program-to-jbc>selected
+      result   := <program-to-cil>selected
       
   // Prints the analyzed annotated abstract syntax ATerm of a selection.
   debug-show-analyzed:
